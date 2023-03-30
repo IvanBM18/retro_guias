@@ -18,10 +18,10 @@ export default function LandingPageLayout({ children }: Props) {
           <link rel="icon" href="/retrowiki.ico" />
         </Head>
         <div className="top-0 left-0 right-0 fixed">{children}</div>
-        <body>
+        <div>
           <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-20 lg:items-center">
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl mt-6">
+            <div className="mx-auto ">
+              <h1 className="mt-6 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text  font-extrabold text-transparent text-3xl sm:text-5xl ">
                 Retro Wiki
               </h1>
             </div>
@@ -100,14 +100,15 @@ export default function LandingPageLayout({ children }: Props) {
               </div>
             </article>
           </div>
-        </body>
-        {/* footer */}
+        </div>
+        {/* Footer */}
         <footer aria-label="Site Footer" className="bg-gray-700">
           <div className="mx-auto max-w-screen-xl px-4 pt-16 pb-8 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-md">
               <strong className="block text-center text-xl font-bold text-white sm:text-3xl">
                 ¿Quieres recibir notificaciones de los mejores trucos?
               </strong>
+
               <form className="mt-6">
                 <div className="relative max-w-lg">
                   <label className="sr-only" htmlFor="email">
@@ -126,6 +127,7 @@ export default function LandingPageLayout({ children }: Props) {
                 </div>
               </form>
             </div>
+
             <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
               <div className="mx-auto max-w-sm lg:max-w-none">
                 <p className="mt-4 text-center text-white lg:text-left lg:text-lg">
@@ -214,6 +216,7 @@ export default function LandingPageLayout({ children }: Props) {
                   </a>
                 </div>
               </div>
+
               <div className="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left">
                 <div>
                   <strong className="font-medium text-white">
@@ -260,6 +263,7 @@ export default function LandingPageLayout({ children }: Props) {
                 </div>
               </div>
             </div>
+
             <div className="mt-16 border-t border-gray-100 pt-8">
               <p className="text-center text-xs leading-relaxed text-white">
                 © Retrowiki 2023. All rights reserved.
