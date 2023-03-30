@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import LandingPage from "./landingPage";
 
 //TODO: Add theme switch
 const NavBar = () => {
@@ -38,7 +37,7 @@ const NavBar = () => {
     }
     setMobileMenu(!isOpenMobileMenu);
   };
-  
+
   return (
     <div className="top-0 left-0 right-0 fixed">
       <div id="navBar" className="bg-transparent">
