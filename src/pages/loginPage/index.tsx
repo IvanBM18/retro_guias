@@ -59,7 +59,9 @@ function LoginPage() {
                 </div>
               {/* Submit Button */}
               <div className="flex justify-center">
-                <button className="rounded-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
+                <button 
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white ">
                   Inicia Sesion
                 </button>
               </div>
