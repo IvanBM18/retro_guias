@@ -15,6 +15,7 @@ export default function Home() {
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
       <Link href="./landingPage"> haz click en mi xd</Link>
+      <Link href="./loginPage"> Intenta iniciar Sesion</Link>
     </>
   );
 }

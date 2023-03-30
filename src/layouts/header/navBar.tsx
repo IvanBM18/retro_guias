@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 //TODO: Add theme switch
@@ -130,24 +131,24 @@ const NavBar = () => {
               className="hidden absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out md:mt-0 md:p-0 md:top-0 md:relative md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center"
             >
               <div className="flex flex-col md:flex-row md:mx-6 text-lg">
-                <a
-                  href="#"
+                <Link
+                  href="/landingPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
                   Inicio
-                </a>
+                </Link>
                 <a
                   href="#"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
                   Contacto
                 </a>
-                <a
-                  href="#"
+                <Link
+                  href="/loginPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
                   Iniciar sesión
-                </a>
+                </Link>
                 <a
                   href="#"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"

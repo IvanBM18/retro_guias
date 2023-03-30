@@ -1,3 +1,5 @@
+//TODO: Fix image layout on mobile
+//TODO: Create an article card component
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { Inter } from "next/font/google";
@@ -23,7 +25,7 @@ export default function LandingPageLayout() {
               </h1>
             </div>
           </div>
-          <div className="flex justify-center mb-24  py-32 lg:flex lg:h-20 lg:items-center  gap-28">
+          <div className="flex justify-center mb-24  py-32 lg:flex lg:h-20 lg:items-center gap-28 ">
             {/* Article Card */}
             <article className="group w-1/5">
               <a href="#">
