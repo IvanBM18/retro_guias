@@ -8,9 +8,7 @@ import LandingPageLayout from "./components/landingPageLayout";
 export default function LandingPage() {
   return (
     <>
-        <LandingPageLayout>
-          <NavBar/>
-        </LandingPageLayout>
+        <LandingPageLayout/>
     </>
   )
 }

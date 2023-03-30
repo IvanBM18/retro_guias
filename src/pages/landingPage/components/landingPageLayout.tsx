@@ -3,11 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Inter } from "next/font/google";
 import NavBar from "@/layouts/header/navBar";
 
-type Props = {
-  children?: JSX.Element;
-};
 
-export default function LandingPageLayout({ children }: Props) {
+export default function LandingPageLayout() {
   return (
     <>
       <div className="bg-gray-900">
@@ -17,7 +14,7 @@ export default function LandingPageLayout({ children }: Props) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/retrowiki.ico" />
         </Head>
-        <div className="top-0 left-0 right-0 fixed">{children}</div>
+        <NavBar/>
         <div>
           <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-20 lg:items-center">
             <div className="mx-auto ">
