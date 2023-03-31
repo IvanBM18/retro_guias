@@ -39,11 +39,11 @@ function LoginPage() {
         <div className="flex items-center justify-center h-screen bg-gray-900">
           <div>
             <section>
-            <img
-              className="mx-auto h-40 w-auto"
-              src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
-              alt="Logo"
-            />
+              <img
+                className="mx-auto h-40 w-auto"
+                src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
+                alt="Logo"
+              />
               <h2 className="mt-6 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text  font-extrabold text-transparent text-3xl sm:text-5xl ">
                 Inicia sesión
               </h2>

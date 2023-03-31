@@ -161,6 +161,13 @@ const NavBar = () => {
                 >
                   Acerca de
                 </a>
+                <a
+                  href="dashboardPage"
+                  className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
+                >
+                  CRUD
+                </a>
+
                 {/* <div className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer">
                   Inicio
                 </div>
