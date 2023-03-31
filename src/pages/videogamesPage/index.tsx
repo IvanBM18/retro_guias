@@ -46,7 +46,7 @@ export default function Contacto() {
                 </li>
                 <li className="rounded-sm">
                   <a
-                    href="#"
+                    href="/dashboardPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
@@ -68,7 +68,7 @@ export default function Contacto() {
                 </li>
                 <li className="rounded-sm">
                   <a
-                    href="/dashboardPage"
+                    href="/videogamesPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
@@ -90,7 +90,7 @@ export default function Contacto() {
                 </li>
                 <li className="rounded-sm">
                   <a
-                    href="/videogamesPage"
+                    href="#"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
