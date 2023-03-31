@@ -14,9 +14,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
-      <Link href="./landingPage"> haz click en mi xd</Link>
-      <Link href="./loginPage"> Intenta iniciar Sesion</Link>
-      <Link href="./contactoPage"> Contacto</Link>
+      <LandingPage/>
     </>
   );
 }
