@@ -138,7 +138,7 @@ const NavBar = () => {
                   Inicio
                 </Link>
                 <a
-                  href="#"
+                  href="/contactoPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
                   Contacto
@@ -150,7 +150,7 @@ const NavBar = () => {
                   Iniciar sesión
                 </Link>
                 <a
-                  href="#"
+                  href="/aboutPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
                   Acerca de

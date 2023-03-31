@@ -1,6 +1,9 @@
 //TODO: migration to change email to email_adress
 //TODO: Agregar un baner o icono al login
 //TODO: Add JWT
+import NavBar from "@/layouts/header/navBar";
+import Head from "next/head";
+import React, { useState } from "react";
 import NavBar from "@/layouts/header/navBar"; 
 import React, { useState } from 'react'
 import Head from "next/head";
@@ -9,10 +12,10 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import NewUserModal from "./components/newUserModal";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 function LoginPage() {
-  const [email,setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [openNewUserModal,setOpenNewUserModal] = useState<boolean>(false);
   const router = useRouter()
@@ -26,6 +29,7 @@ function LoginPage() {
   };
 
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
 
   return (
     <>
@@ -35,11 +39,17 @@ function LoginPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
+      <NavBar />
       {openNewUserModal && <NewUserModal onClose={closeNewuserModal}/>}
       <NavBar/>
       <div className={inter.className}>
         <div className="flex items-center justify-center h-screen  bg-gray-900">
           <div>
+            <img
+              className="mx-auto h-40 w-auto"
+              src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
+              alt="Logo"
+            />
             <section>
               <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
                 Inicia sesión
@@ -49,6 +59,17 @@ function LoginPage() {
             <form className="mt-8 space-y-2" onSubmit={handleSubmit}>
               {/* Email Textbox */}
               <div className="rounded-md shadow-sm -space-y-px">
+                <label htmlFor="email_adress" className="text-white mb-2">
+                  {" "}
+                  Correo:{" "}
+                </label>
+                <input
+                  id="email_adress"
+                  name="email_adress"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  placeholder="Ejemplo@correo.com"
                 <label htmlFor="email_adress" className="text-white mb-2"> Correo: </label>
                 <input type="email" id="email_adress" name="email_adress"  autoComplete="email" required placeholder="Ejemplo@correo.com"
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
@@ -57,6 +78,20 @@ function LoginPage() {
               </div>
               {/* Password Textbox */}
               <div>
+                <label htmlFor="password" className="text-white mb-2">
+                  Contraseña
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                  placeholder="Contraseña"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
                   <label htmlFor="password" className="text-white mb-2">
                     Contraseña
                   </label>
@@ -77,10 +112,13 @@ function LoginPage() {
               </div>
 
               {/* Submit Button */}
+              <div className="flex justify-center">
+                <button
               <div className="flex justify-center pt-8">
                 <button 
                   type="submit"
-                  className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white ">
+                  className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white "
+                >
                   Inicia Sesion
                 </button>
               </div>
@@ -88,9 +126,8 @@ function LoginPage() {
           </div>
         </div>
       </div>
-
     </>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

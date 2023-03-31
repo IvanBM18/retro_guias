@@ -16,6 +16,7 @@ export default function Home() {
       </Head>
       <Link href="./landingPage"> haz click en mi xd</Link>
       <Link href="./loginPage"> Intenta iniciar Sesion</Link>
+      <Link href="./contactoPage"> Contacto</Link>
     </>
   );
 }
