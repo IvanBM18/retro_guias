@@ -1,18 +1,31 @@
 //TODO: migration to change email to email_adress
 //TODO: Agregar un baner o icono al login
 //TODO: Add JWT
-import NavBar from "@/layouts/header/navBar";
-import Head from "next/head";
+import NavBar from "@/layouts/header/navBar"; 
 import React, { useState } from 'react'
+import Head from "next/head";
 import { Inter } from "next/font/google";
+import { useRouter } from 'next/navigation';
+import Link from "next/link";
+import NewUserModal from "./components/newUserModal";
 
 const inter = Inter({ subsets: ['latin'] })
 
 function LoginPage() {
   const [email,setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [openNewUserModal,setOpenNewUserModal] = useState<boolean>(false);
+  const router = useRouter()
 
-  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {};
+  const closeNewuserModal = () => {
+    setOpenNewUserModal(false);
+  }
+
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+    router.push('/landingPage');
+  };
+
+
 
   return (
     <>
@@ -22,6 +35,7 @@ function LoginPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
+      {openNewUserModal && <NewUserModal onClose={closeNewuserModal}/>}
       <NavBar/>
       <div className={inter.className}>
         <div className="flex items-center justify-center h-screen  bg-gray-900">
@@ -32,11 +46,11 @@ function LoginPage() {
               </h2>
             </section>
 
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <form className="mt-8 space-y-2" onSubmit={handleSubmit}>
               {/* Email Textbox */}
               <div className="rounded-md shadow-sm -space-y-px">
                 <label htmlFor="email_adress" className="text-white mb-2"> Correo: </label>
-                <input id="email_adress" name="email_adress" type="email" autoComplete="email" required placeholder="Ejemplo@correo.com"
+                <input type="email" id="email_adress" name="email_adress"  autoComplete="email" required placeholder="Ejemplo@correo.com"
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -57,8 +71,13 @@ function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+              {/* Crear Cuenta */}
+              <div className="text-white text-opacity-60 hover:underline hover:text-opacity-90 ">
+                <span onClick={() =>setOpenNewUserModal(true)}>No tienes una cuenta?, Crea una</span>
+              </div>
+
               {/* Submit Button */}
-              <div className="flex justify-center">
+              <div className="flex justify-center pt-8">
                 <button 
                   type="submit"
                   className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white ">
