@@ -74,14 +74,14 @@ const NavBar = () => {
             </form>
             <div className="flex items-center justify-between cursor-pointer">
               <div className="flex gap-4 font-bold text-center  ">
-                <img
-                  className="w-auto h-6 sm:h-9 md:i"
-                  src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
-                  alt="Logo Retro Wiki"
-                />
-                <p className="m-auto text-lg sm:text-xl dark:text-white hover:text-emerald-400 dark:hover:text-blue-400">
-                  Retro Wiki
-                </p>
+                <Link href="/landingPage">
+                  <img
+                    className="w-auto h- sm:h-9 md:i "
+                    src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
+                    alt="Logo Retro Wiki"
+                  />
+                </Link>
+
               </div>
               {/* <!-- Mobile menu button --> */}
               <div className="flex lg:hidden">
