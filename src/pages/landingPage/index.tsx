@@ -19,7 +19,7 @@ export default function LandingPage() {
         <NavBar/>
         <div>
           <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-20 lg:items-center">
-            <div className="mx-auto ">
+            <div className="mx-auto">
               <h1 className="mt-6 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text  font-extrabold text-transparent text-3xl sm:text-5xl ">
                 Retro Wiki
               </h1>

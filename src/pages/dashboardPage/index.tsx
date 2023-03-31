@@ -2,10 +2,18 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import NavBar from "@/layouts/header/navBar";
+import { useState } from "react";
+import ArticleModal from "./component/articleModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Contacto() {
+export default function DasboardEntries() {
+  const [showArticleModal,setShowArticleModal] = useState<boolean>(false)
+
+  const onCloseArticleModal = () =>{
+    setShowArticleModal(false);
+  }
+
   return (
     <>
       <Head>
@@ -14,6 +22,7 @@ export default function Contacto() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
+      {showArticleModal && <ArticleModal onClose={onCloseArticleModal}/>}
       <div className="flex">
         <div className="flex flex-col h-screen p-3 bg-white shadow w-60">
           <div className="space-y-3">
@@ -23,7 +32,7 @@ export default function Contacto() {
             <div className="flex-1">
               <ul className="pt-2 pb-4 space-y-1 text-sm">
                 <li className="rounded-sm">
-                  <a
+                  <Link
                     href="/landingPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
@@ -42,7 +51,7 @@ export default function Contacto() {
                       />
                     </svg>
                     <span>Home</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
                   <a
@@ -67,7 +76,7 @@ export default function Contacto() {
                   </a>
                 </li>
                 <li className="rounded-sm">
-                  <a
+                  <Link
                     href="/dashboardPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
@@ -86,10 +95,10 @@ export default function Contacto() {
                       />
                     </svg>
                     <span>Videojuegos</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
-                  <a
+                  <Link
                     href="/videogamesPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
@@ -113,7 +122,7 @@ export default function Contacto() {
                       />
                     </svg>
                     <span>Ajustes</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
                   <a
@@ -146,11 +155,13 @@ export default function Contacto() {
           <div className="mb-4">
             <h1 className="font-serif text-3xl font-bold underline decoration-gray-400">
               {" "}
-              Entradas
+              Articulos
             </h1>
             <div className="flex justify-end">
-              <button className="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600">
-                Crear Post
+              <button className="px-4 py-2 rounded-md bg-sky-500 text-sky-100 hover:bg-sky-600"
+                onClick={() => setShowArticleModal(true)}
+              >
+                Nueva Entrada
               </button>
             </div>
           </div>
@@ -170,11 +181,10 @@ export default function Contacto() {
                         Descripcion
                       </th>
                       <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                        Createdo
+                        Fecha de creacion
                       </th>
                       <th
                         className="px-6 py-3 text-sm text-left text-gray-500 border-b border-gray-200 bg-gray-50"
-                        colspan="3"
                       >
                         acciones
                       </th>
@@ -204,7 +214,7 @@ export default function Contacto() {
                         <span>12/12/22</span>
                       </td>
 
-                      <td className="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
+                      {/* <td className="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
                         <a
                           href="#"
                           className="text-indigo-600 hover:text-indigo-900"
@@ -217,9 +227,9 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                             />
                           </svg>
@@ -238,21 +248,21 @@ export default function Contacto() {
                               stroke="currentColor"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                               />
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                               />
                             </svg>
                           </a>
                         </td>
-                      </td>
+                      </td> */}
                       <td className="text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200 ">
                         <a href="#">
                           <svg
@@ -263,9 +273,9 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                             />
                           </svg>
@@ -307,9 +317,9 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                             />
                           </svg>
@@ -329,15 +339,15 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                             />
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                             />
                           </svg>
@@ -353,9 +363,9 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                             />
                           </svg>
@@ -397,9 +407,9 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                             />
                           </svg>
@@ -418,15 +428,15 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                             />
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                             />
                           </svg>
@@ -442,9 +452,9 @@ export default function Contacto() {
                             stroke="currentColor"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                             />
                           </svg>

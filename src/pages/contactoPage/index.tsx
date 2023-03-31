@@ -17,16 +17,6 @@ export default function Contacto() {
       <NavBar />
 
       <section className="bg-gray-900 text-gray-600">
-        {/* <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
-              Understand User Flow.
-              <span className="sm:block"> Increase Conversion. </span>
-            </h1>
-            
-            
-          </div>
-        </div> */}
         <div className="mx-auto max-w-screen-xl px-60 py-32 lg:flex lg:h-screen ">
           <article>
             <div className="mx-auto max-w-3xl">
