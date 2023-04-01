@@ -22,8 +22,9 @@ export default function DasboardEntries() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
-      {showArticleModal && <ArticleModal onClose={onCloseArticleModal}/>}
+      
       <div className="flex bg-gray-800">
+      {showArticleModal && <ArticleModal onClose={onCloseArticleModal}/>}
         {/* SideBar */}
         <div className="flex flex-col h-screen p-3 bg-gray-900 shadow w-60">
           <div className="space-y-3 text-white">

@@ -49,12 +49,12 @@ const ArticleModal = (props: articleModalProps) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-800 shadow-xl rounded-2xl">
+              <div className="inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-800 shadow-xl rounded-2xl">
                 <Dialog.Title as="h3" className="text-xl font-bold leading-6 text-white mb-2">
                   Nueva Entrada
                 </Dialog.Title>
 
-                <form className="w-full max-w-lg">
+                <form className="w-full">
                   {/* Title TextBox */}
                   <div className="w-full px-3 mb-3">
                     <label htmlFor='grid-title' className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2">
@@ -85,11 +85,11 @@ const ArticleModal = (props: articleModalProps) => {
                       />
                   </div>
                   {/* Submit Button */}
-                  <div className="flex justify-center pt-8">
+                  <div className="flex justify-center pt-8 w-full md:w-96">
                     <button 
                       type="submit"
                       className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white ">
-                      Crear cuenta
+                      Crear Entrada
                     </button>
                   </div>
                 </form>

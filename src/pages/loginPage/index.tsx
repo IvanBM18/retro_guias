@@ -6,8 +6,9 @@ import React, { useState } from "react";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import NewUserModal from "./components/newUserModal";
+import AuthServices from "@/services/authentication/authServices";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,12 @@ function LoginPage() {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    router.push("/landingPage");
+    e.preventDefault();
+    AuthServices.login({email:email,password:password});
+    if(AuthServices.user){
+      router.push("/landingPage");
+    }
+    
   };
 
   return (

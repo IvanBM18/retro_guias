@@ -1,6 +1,8 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, ReactElement, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-
+import AuthServices from '@/services/authentication/authServices'
+import IUser from '../../../../models/typescriptModels/user'
+import { isConstructorDeclaration } from 'typescript'
 interface newUserProps {
   onClose: () => void
 }
@@ -11,6 +13,24 @@ const NewUserModal = (props: newUserProps) => {
   const [name,setName] = useState<string>("");
   const [email,setEmail] = useState<string>("");
   const [password,setPassword] = useState<string>("");
+
+  // const meetsRequierements= (pwd : string) => {
+  //   if(pwd.length < 8) return false;
+  //   return false;
+  // }
+
+  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+    setLoading(true);
+    let newUser :IUser = {
+      email:email,
+      password:password
+    };
+    await AuthServices.createAccount(newUser);
+    if(AuthServices.user) props.onClose();
+    console.log("-USUARIO CREADO");
+    setLoading(false);
+  } 
 
   const onClose = () =>{
     setLoading(false)
@@ -58,7 +78,7 @@ const NewUserModal = (props: newUserProps) => {
                   Registrate
                 </Dialog.Title>
 
-                <form className="w-full max-w-lg">
+                <form className="w-full max-w-lg" onSubmit={handleSubmit} >
                   {/* Name TextBox */}
                   <div className="w-full px-3 mb-3">
                     <label htmlFor='grid-name' className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2">
