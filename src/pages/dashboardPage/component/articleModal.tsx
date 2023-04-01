@@ -75,10 +75,9 @@ const ArticleModal = (props: articleModalProps) => {
                     <label htmlFor='grid-description' className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2">
                       Descripcion
                     </label>
-                      <input
+                      <textarea
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                         id="grid-description"
-                        type="text"
                         placeholder="Descripcion breve"
                         required
                         name="description"
