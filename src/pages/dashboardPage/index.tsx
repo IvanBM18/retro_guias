@@ -5,14 +5,33 @@ import NavBar from "@/layouts/header/navBar";
 import { useState } from "react";
 import ArticleModal from "./component/articleModal";
 
+import { EditButton } from "./component/editButton";
+import { DeleteButton } from "./component/deleteButton";
+import { SeeRowButton } from "./component/seeRowButton";
+
 const inter = Inter({ subsets: ["latin"] });
 
-export default function DasboardEntries() {
-  const [showArticleModal,setShowArticleModal] = useState<boolean>(false)
+const dummyData = [
+  {
+    id: 1,
+    title: "Hola Edgar",
+    description: "soy un texto de prueba",
+    date: "2021-08-01",
+  },
+  {
+    id: 2,
+    title: "Ke pedo",
+    description: "soy un texto de prueba dos",
+    date: "2021-08-01",
+  },
+];
 
-  const onCloseArticleModal = () =>{
+export default function DasboardEntries() {
+  const [showArticleModal, setShowArticleModal] = useState<boolean>(false);
+
+  const onCloseArticleModal = () => {
     setShowArticleModal(false);
-  }
+  };
 
   return (
     <>
@@ -22,9 +41,8 @@ export default function DasboardEntries() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
-      
       <div className="flex bg-gray-800">
-      {showArticleModal && <ArticleModal onClose={onCloseArticleModal}/>}
+        {showArticleModal && <ArticleModal onClose={onCloseArticleModal} />}
         {/* SideBar */}
         <div className="flex flex-col h-screen p-3 bg-gray-900 shadow w-60">
           <div className="space-y-3 text-white">
@@ -159,7 +177,8 @@ export default function DasboardEntries() {
               Articulos
             </h1>
             <div className="flex justify-end">
-              <button className="px-4 py-2 rounded-md bg-blue-800 text-sky-100 hover:bg-sky-600"
+              <button
+                className="px-4 py-2 rounded-md bg-blue-800 text-sky-100 hover:bg-sky-600"
                 onClick={() => setShowArticleModal(true)}
               >
                 Nueva Entrada
@@ -192,86 +211,42 @@ export default function DasboardEntries() {
                   </thead>
                   {/* Table body */}
                   <tbody className="bg-white">
-                    <tr className="border-b border-gray-200">
-                      <td className="px-6 py-4 whitespace-no-wrap ">
-                        <span className="flex items-center">2</span>
-                      </td>
+                    {
+                      // Table row
+                      dummyData.map((article) => (
+                        <tr
+                          className="border-b border-gray-200"
+                          key={article.id}
+                        >
+                          <td className="px-6 py-4 whitespace-no-wrap ">
+                            <span className="flex items-center">
+                              {article.id}
+                            </span>
+                          </td>
 
-                      <td className="px-6 py-4 whitespace-no-wrap ">
-                        <div className="text-sm leading-5 text-gray-900">
-                          Toy Story 2
-                        </div>
-                      </td>
+                          <td className="px-6 py-4 whitespace-no-wrap ">
+                            <div className="text-sm leading-5 text-gray-900">
+                              {article.title}
+                            </div>
+                          </td>
 
-                      <td className="px-6 py-4 whitespace-no-wrap ">
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit...
-                        </p>
-                      </td>
+                          <td className="px-6 py-4 whitespace-no-wrap ">
+                            <p>{article.description}</p>
+                          </td>
 
-                      <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap ">
-                        <span>12/12/22</span>
-                      </td>
-                      {/* Action buttons */}
-                      <td className="flex py-4 gap-2 ml-3 text-sm  ">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-6 h-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                            />
-                          </svg>
-                        </a>
-                        <a href="#" className="text-gray-600 hover:text-gray-900">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-6 h-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                            />
-                          </svg>
-                        </a>
-                        <a href="#">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-6 h-6 text-red-600 hover:text-red-800"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
-                        </a>
-                      </td>
-                    </tr>
-                    
+                          <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap ">
+                            <span>{article.date}</span>
+                          </td>
+                          {/* Action buttons */}
+                          <td className="flex py-4 gap-2 ml-3 text-sm  ">
+                            {/* Edit button */}
+                            <EditButton />
+                            <SeeRowButton />
+                            <DeleteButton />
+                          </td>
+                        </tr>
+                      ))
+                    }
                   </tbody>
                 </table>
               </div>
@@ -279,6 +254,7 @@ export default function DasboardEntries() {
           </div>
         </div>
       </div>
+          
     </>
   );
 }
