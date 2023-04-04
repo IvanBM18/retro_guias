@@ -13,21 +13,50 @@ const inter = Inter({ subsets: ["latin"] });
 
 const dummyData = [
   {
-    id: 1,
+    id: 0,
     title: "Hola Edgar",
     description: "soy un texto de prueba",
     date: "2021-08-01",
   },
   {
-    id: 2,
+    id: 1,
     title: "Ke pedo",
     description: "soy un texto de prueba dos",
     date: "2021-08-01",
   },
+  {
+    id: 2,
+    title: "SS",
+    description: "soy un texto de prueba 3s",
+    date: "2021-08-01",
+  },
 ];
+
+type article = {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+};
 
 export default function DasboardEntries() {
   const [showArticleModal, setShowArticleModal] = useState<boolean>(false);
+  const [editArticleModal, setEditArticleModal] = useState<boolean>(false);
+  //array of articles
+  const [articles, setArticles] = useState<article[]>(dummyData);
+  //article to edit
+  const [article, setArticle] = useState<article>({
+    id: -1,
+    title: "",
+    description: "",
+    date: "",
+  });
+
+  const onOpenArticleModal = (id: any) => {
+    setEditArticleModal(true);
+    setArticle(articles[id]);
+    setShowArticleModal(true);
+  };
 
   const onCloseArticleModal = () => {
     setShowArticleModal(false);
@@ -42,7 +71,34 @@ export default function DasboardEntries() {
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
       <div className="flex bg-gray-800">
-        {showArticleModal && <ArticleModal onClose={onCloseArticleModal} />}
+        {showArticleModal && (
+          <ArticleModal
+            onClose={onCloseArticleModal}
+            article={
+              editArticleModal
+                ? article
+                : {
+                    id: articles.length,
+                    title: "",
+                    description: "",
+                    date: "",
+                  }
+            }
+            setNewArticle={
+              editArticleModal
+                ? (article) => {
+                    setArticles(
+                      articles.map((art) =>
+                        art.id === article.id ? art : article
+                      )
+                    );
+                  }
+                : (article) => {
+                    setArticles([...articles, article]);
+                  }
+            }
+          />
+        )}
         {/* SideBar */}
         <div className="flex flex-col h-screen p-3 bg-gray-900 shadow w-60">
           <div className="space-y-3 text-white">
@@ -179,7 +235,16 @@ export default function DasboardEntries() {
             <div className="flex justify-end">
               <button
                 className="px-4 py-2 rounded-md bg-blue-800 text-sky-100 hover:bg-sky-600"
-                onClick={() => setShowArticleModal(true)}
+                onClick={() => {
+                  setArticle({
+                    id: -1,
+                    title: "",
+                    description: "",
+                    date: "",
+                  });
+                  setEditArticleModal(false);
+                  setShowArticleModal(true);
+                }}
               >
                 Nueva Entrada
               </button>
@@ -240,9 +305,17 @@ export default function DasboardEntries() {
                           {/* Action buttons */}
                           <td className="flex py-4 gap-2 ml-3 text-sm  ">
                             {/* Edit button */}
-                            <EditButton />
-                            <SeeRowButton />
+                            <button
+                              onClick={() => {
+                                onOpenArticleModal(article.id);
+                              }}
+                            >
+                              <EditButton />
+                            </button>
+                            {/* Delete button */}
                             <DeleteButton />
+                            {/* See details button */}
+                            <SeeRowButton />
                           </td>
                         </tr>
                       ))
@@ -254,7 +327,6 @@ export default function DasboardEntries() {
           </div>
         </div>
       </div>
-          
     </>
   );
 }

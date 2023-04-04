@@ -3,41 +3,13 @@ import { Dialog, Transition } from "@headlessui/react";
 
 interface articleModalProps {
   onClose: () => void;
-  article?: {
-    id: number;
-    title: string;
-    description: string;
-    date: string;
-  };
-  setNewArticle?: (article: article) => void;
 }
-
-type article = {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-};
 
 const ArticleModal = (props: articleModalProps) => {
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const [article, setArticle] = useState<article>({
-    id: props.article?.id || -1,
-    title: props.article?.title || "",
-    description: props.article?.description || "",
-    date: props.article?.date || "",
-  });
-
   const onClose = () => {
     setLoading(false);
-    const hoy = new Date().toLocaleDateString();
-    setArticle({ ...article, date: hoy });
-    console.log(article, hoy);
-    //props.setNewArticle && props.setNewArticle(article);
-    props.article?.title !== "" &&
-      props.setNewArticle &&
-      props.setNewArticle(article);
     props.onClose();
   };
 
@@ -84,7 +56,7 @@ const ArticleModal = (props: articleModalProps) => {
                   as="h3"
                   className="text-xl font-bold leading-6 text-white mb-2"
                 >
-                  {props.article?.title !== "" ? "Editar" : "Crear"} Articulo
+                  Nueva Entrada
                 </Dialog.Title>
 
                 <form className="w-full">
@@ -103,10 +75,6 @@ const ArticleModal = (props: articleModalProps) => {
                       placeholder="Titulo del articulo"
                       required
                       name="title"
-                      value={article.title}
-                      onChange={(e) =>
-                        setArticle({ ...article, title: e.target.value })
-                      }
                     />
                   </div>
                   {/* Description TextBox */}
@@ -123,10 +91,6 @@ const ArticleModal = (props: articleModalProps) => {
                       placeholder="Descripcion breve"
                       required
                       name="description"
-                      value={article.description}
-                      onChange={(e) =>
-                        setArticle({ ...article, description: e.target.value })
-                      }
                     />
                   </div>
                   {/* Submit Button */}
@@ -134,9 +98,8 @@ const ArticleModal = (props: articleModalProps) => {
                     <button
                       type="submit"
                       className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white "
-                      onClick={onClose}
                     >
-                      {props.article?.title !== "" ? "Editar" : "Crear"}
+                      Crear Entrada
                     </button>
                   </div>
                 </form>
