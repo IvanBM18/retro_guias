@@ -1,6 +1,3 @@
-//TODO: migration to change email to email_adress
-//TODO: Agregar un baner o icono al login
-//TODO: Add JWT
 import NavBar from "@/layouts/header/navBar";
 import React, { useState } from "react";
 import Head from "next/head";
@@ -8,6 +5,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
 import NewUserModal from "./components/newUserModal";
 import AuthServices from "@/services/authentication/authServices";
+import UserService from "@/services/database/userService";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +24,8 @@ function LoginPage() {
     e.preventDefault();
     AuthServices.login({email:email,password:password});
     if(AuthServices.user){
+      console.log(AuthServices.user.uid);
+      
       router.push("/landingPage");
     }
     

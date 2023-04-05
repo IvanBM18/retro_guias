@@ -1,4 +1,4 @@
-import IUser from "./user";
+import UserCredentials from "./user";
 
 export default interface IArticle{
     id:number,
@@ -8,5 +8,5 @@ export default interface IArticle{
 }
 
 export interface ISignedArticle extends IArticle{
-    createdByUser : IUser
+    createdByUser : UserCredentials
 }

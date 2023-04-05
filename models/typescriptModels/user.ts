@@ -1,10 +1,10 @@
-export interface fullUser extends IUser{
-    id:number,
+export interface User extends UserCredentials{
+    id:string,
     name: string,
     
 }
 
-export default interface IUser{
+export default interface UserCredentials{
     email:string,
     password:string,
 }

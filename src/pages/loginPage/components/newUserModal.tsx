@@ -1,8 +1,9 @@
 import React, { Fragment, ReactElement, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import AuthServices from '@/services/authentication/authServices'
-import IUser from '../../../../models/typescriptModels/user'
-import { isConstructorDeclaration } from 'typescript'
+import UserCredentials from '../../../../models/typescriptModels/user'
+import UserService from '@/services/database/userService'
+import auth from '@/services/authentication/config/authentication'
 interface newUserProps {
   onClose: () => void
 }
@@ -12,23 +13,50 @@ const NewUserModal = (props: newUserProps) => {
   const [isLoading,setLoading] = useState<boolean>(false);
   const [name,setName] = useState<string>("");
   const [email,setEmail] = useState<string>("");
+  const [userId, setuserId] = useState<string>("");
   const [password,setPassword] = useState<string>("");
 
   // const meetsRequierements= (pwd : string) => {
   //   if(pwd.length < 8) return false;
   //   return false;
   // }
+  const submitToDB = async () => {
+    fetch('/api/users', {
+      method:'POST',
+      body: JSON.stringify({email:email,
+        password:password,
+        id: userId,
+        name:name}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response : Response) => {
+      if(response.ok){
+        console.log('USUARIO EN DB')
+      }else{
+        console.log('DB USER response not OK')
+      }
+    }).catch((err : Error) =>{
+      console.error(err);
+    });
+  }
 
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
     setLoading(true);
-    let newUser :IUser = {
+    let newUser :UserCredentials = {
       email:email,
       password:password
     };
     await AuthServices.createAccount(newUser);
-    if(AuthServices.user) props.onClose();
-    console.log("-USUARIO CREADO");
+    if(AuthServices.user){
+      props.onClose();
+      setuserId(AuthServices.user.uid);
+      submitToDB();
+      console.log("-USUARIO CREADO");
+    } 
+
+    
     setLoading(false);
   } 
 

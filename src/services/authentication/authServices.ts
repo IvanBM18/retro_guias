@@ -1,11 +1,11 @@
 import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import IUser from "../../../models/typescriptModels/user";
+import UserCredentials from "../../../models/typescriptModels/user";
 import auth from "./config/authentication";
 
 class AuthServices{
   static user : User;
 
-  static async createAccount(newUser : IUser){
+  static async createAccount(newUser : UserCredentials){
     // console.log(newUser);
     createUserWithEmailAndPassword(auth,newUser.email,newUser.password)
       .then( (userCredentials : UserCredential) =>{
@@ -16,7 +16,7 @@ class AuthServices{
       })
   }
 
-  static async login(credentials : IUser){
+  static async login(credentials : UserCredentials){
     signInWithEmailAndPassword(auth,credentials.email,credentials.password)
       .then((userCredentials : UserCredential) =>{
         this.user = userCredentials.user;
