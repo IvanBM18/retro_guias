@@ -1,9 +1,8 @@
 import React, { Fragment, ReactElement, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import AuthServices from '@/services/authentication/authServices'
+import AuthService from '@/services/authentication/authService'
 import UserCredentials from '../../../../models/typescriptModels/user'
 import UserService from '@/services/database/userService'
-import auth from '@/services/authentication/config/authentication'
 interface newUserProps {
   onClose: () => void
 }
@@ -48,11 +47,11 @@ const NewUserModal = (props: newUserProps) => {
       email:email,
       password:password
     };
-    await AuthServices.createAccount(newUser);
-    if(AuthServices.user){
+    await AuthService.createAccount(newUser);
+    if(AuthService.user){
+      setuserId(AuthService.user.uid);
+      await UserService.registerUserName({name:name,id:AuthService.user.uid,...newUser})
       props.onClose();
-      setuserId(AuthServices.user.uid);
-      submitToDB();
       console.log("-USUARIO CREADO");
     } 
 

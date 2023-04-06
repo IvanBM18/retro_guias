@@ -1,23 +1,23 @@
-import connection from "./connection";
-import mysql from 'mysql2/promise';
 import { User } from "../../../models/typescriptModels/user";
+import { collection, addDoc, FirestoreError, doc } from "firebase/firestore";
+import db from "./config/dbProvider";
 
 class UserService{
 
-    static async inserUser(user:User){
-        const dbConnection = await mysql.createConnection({
-            host: 'localhost',
-            port:3306,
-            user: 'root',
-            password: '',
-            database: 'test',
-        });
-        await dbConnection.execute(
-            'INSERT INTO users (id,name) VALUES (?,?)',
-            [user.id,user.name]
-        )
-        dbConnection.end();
+    static async registerUserName(user : User){
+      await addDoc(collection(db,"users"),{name:user.name,id:user.id})
+        .then(() =>{
+          console.log("User Document Writen");
+        })
+        .catch((e : FirestoreError) =>{
+          console.error(`[ERROR] adding document, more info: ${e}`);
+        })
     }
+
+    // async getUserName(user : User){
+    //   const docRef = doc(db,"users",);
+    // }
+
 }
 
 export default UserService;
