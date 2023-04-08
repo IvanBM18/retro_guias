@@ -36,9 +36,11 @@ export default function DasboardEntries() {
   const router = useRouter();
   const [showArticleModal, setShowArticleModal] = useState<boolean>(false);
   const [editArticleModal, setEditArticleModal] = useState<boolean>(false);
+  const [isLoading,setIsLoading] = useState<boolean>(false);
   //array of articles
   const [articles, setArticles] = useState<IArticle[]>([]);
   const dataFetchedRef = useRef(false);
+  
   //article to edit
   const [article, setArticle] = useState<IArticle>({
     id: -1,
@@ -61,10 +63,12 @@ export default function DasboardEntries() {
     ArticleService.fetchAll().then(()=>{
       setArticles([...ArticleService.articleList]);
     });
+    setIsLoading(false);
   }
 
   useEffect(()=>{
     if (dataFetchedRef.current) return;
+    setIsLoading(true);
     dataFetchedRef.current = true;
     fetchArticles();
     // console.log([...ArticleService.articleList]);
@@ -261,6 +265,11 @@ export default function DasboardEntries() {
             </div>
           </div>
           <div className=" flex flex-col">
+              {isLoading && 
+                <div className="m-auto pt-8 text-center text-white text-4xl">
+                  Cargando . . .
+                </div>}
+                    
             <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
               <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                 <table className="min-w-full">
