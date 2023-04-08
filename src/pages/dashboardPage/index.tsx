@@ -8,27 +8,27 @@ import ArticleModal from "./component/articleModal";
 import { EditButton } from "./component/editButton";
 import { DeleteButton } from "./component/deleteButton";
 import { SeeRowButton } from "./component/seeRowButton";
+import ArticleService from "@/services/database/articleService";
 
-const inter = Inter({ subsets: ["latin"] });
 
 const dummyData = [
   {
     id: 0,
     title: "Hola Edgar",
     description: "soy un texto de prueba",
-    date: "2021-08-01",
+    createdAt: "2021-08-01",
   },
   {
     id: 1,
     title: "Ke pedo",
     description: "soy un texto de prueba dos",
-    date: "2021-08-01",
+    createdAt: "2021-08-01",
   },
   {
     id: 2,
     title: "SS",
     description: "soy un texto de prueba 3s",
-    date: "2021-08-01",
+    createdAt: "2021-08-01",
   },
 ];
 
@@ -36,7 +36,7 @@ type article = {
   id: number;
   title: string;
   description: string;
-  date: string;
+  createdAt: string;
 };
 
 export default function DasboardEntries() {
@@ -49,7 +49,7 @@ export default function DasboardEntries() {
     id: -1,
     title: "",
     description: "",
-    date: "",
+    createdAt: "",
   });
 
   const onOpenArticleModal = (id: any) => {
@@ -81,19 +81,21 @@ export default function DasboardEntries() {
                     id: articles.length,
                     title: "",
                     description: "",
-                    date: "",
+                    createdAt: "",
                   }
             }
             setNewArticle={
               editArticleModal
                 ? (article) => {
+                    ArticleService.updateArticle(article);
                     setArticles(
                       articles.map((art) =>
-                        art.id === article.id ? art : article
+                        art.id === article.id ? article : art
                       )
                     );
                   }
                 : (article) => {
+                    ArticleService.postArticle(article);
                     setArticles([...articles, article]);
                   }
             }
@@ -240,7 +242,7 @@ export default function DasboardEntries() {
                     id: -1,
                     title: "",
                     description: "",
-                    date: "",
+                    createdAt: "",
                   });
                   setEditArticleModal(false);
                   setShowArticleModal(true);
@@ -278,7 +280,7 @@ export default function DasboardEntries() {
                   <tbody className="bg-white">
                     {
                       // Table row
-                      dummyData.map((article) => (
+                      articles.map((article) => (
                         <tr
                           className="border-b border-gray-200"
                           key={article.id}
@@ -300,7 +302,7 @@ export default function DasboardEntries() {
                           </td>
 
                           <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap ">
-                            <span>{article.date}</span>
+                            <span>{article.createdAt}</span>
                           </td>
                           {/* Action buttons */}
                           <td className="flex py-4 gap-2 ml-3 text-sm  ">

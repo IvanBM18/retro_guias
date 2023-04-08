@@ -7,7 +7,7 @@ interface articleModalProps {
     id: number;
     title: string;
     description: string;
-    date: string;
+    createdAt: string;
   };
   setNewArticle?: (article: article) => void;
 }
@@ -16,7 +16,7 @@ type article = {
   id: number;
   title: string;
   description: string;
-  date: string;
+  createdAt: string;
 };
 
 const ArticleModal = (props: articleModalProps) => {
@@ -26,18 +26,19 @@ const ArticleModal = (props: articleModalProps) => {
     id: props.article?.id || -1,
     title: props.article?.title || "",
     description: props.article?.description || "",
-    date: props.article?.date || "",
+    createdAt: props.article?.createdAt || "",
   });
 
-  const onClose = () => {
+  const onClose = (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(false);
-    const hoy = new Date().toLocaleDateString();
-    setArticle({ ...article, date: hoy });
-    console.log(article, hoy);
+    const currDate = new Date().toLocaleDateString();
+    setArticle({ ...article, createdAt: currDate });
     //props.setNewArticle && props.setNewArticle(article);
-    props.article?.title !== "" &&
-      props.setNewArticle &&
-      props.setNewArticle(article);
+    // console.log(article,props.setNewArticle);
+    if (article?.title !== "" && props.setNewArticle){
+      props.setNewArticle({...article, createdAt:currDate });
+    }
     props.onClose();
   };
 
@@ -47,7 +48,7 @@ const ArticleModal = (props: articleModalProps) => {
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto w-screen h-screen flex items-center justify-center bg-black bg-opacity-70"
-          onClose={onClose}
+          onClose={props.onClose}
         >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
@@ -87,7 +88,7 @@ const ArticleModal = (props: articleModalProps) => {
                   {props.article?.title !== "" ? "Editar" : "Crear"} Articulo
                 </Dialog.Title>
 
-                <form className="w-full">
+                <form className="w-full" onSubmit={onClose}>
                   {/* Title TextBox */}
                   <div className="w-full px-3 mb-3">
                     <label
@@ -134,7 +135,6 @@ const ArticleModal = (props: articleModalProps) => {
                     <button
                       type="submit"
                       className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white "
-                      onClick={onClose}
                     >
                       {props.article?.title !== "" ? "Editar" : "Crear"}
                     </button>
