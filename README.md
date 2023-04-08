@@ -1,14 +1,14 @@
-## Este proyecto esta desarrollado en react
+## Este proyecto esta desarrollado en React y Next.js
 
-💡 | Para poder usar este proyecto 
+💡 | Para poder probar este proyecto 
 
 📍 Utilizar el comando para instalar lo necesario
 npm install
 
-👾 Para iniciar el proyecto
+👾 Para correr el proyecto
 npm run dev
 
-🌐 Abrir en el navegador 
+🌐 Direccion por defecto en el navegador 
 (http://localhost:3000)
 
 
