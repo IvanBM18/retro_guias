@@ -63,12 +63,16 @@ export default function DasboardEntries() {
     setShowArticleModal(false);
   };
 
+  const fetchArticles = () =>{
+    ArticleService.fetchAll().then(()=>{
+      setArticles([...ArticleService.articleList]);
+    });
+  }
+
   useEffect(()=>{
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    ArticleService.fetchAll().then(()=>{
-      setArticles([...ArticleService.articleList.sort()]);
-    });
+    fetchArticles();
     // console.log([...ArticleService.articleList]);
   },[])
 
@@ -88,7 +92,7 @@ export default function DasboardEntries() {
               editArticleModal
                 ? article
                 : {
-                    id: articles.length,
+                    id: articles.length+1,
                     title: "",
                     description: "",
                     createdAt: "",
@@ -327,10 +331,13 @@ export default function DasboardEntries() {
                             {/* Delete button */}
                             <button
                               onClick={() => {
+                                console.log('clicked on delete')
                                 ArticleService.deleteArticle(article);
+                                setArticles(articles.filter((art) => art.id !== article.id));
                               }}
-                            ></button>
-                            <DeleteButton />
+                            >
+                              <DeleteButton />
+                            </button>
                             {/* See details button */}
                             <SeeRowButton />
                           </td>

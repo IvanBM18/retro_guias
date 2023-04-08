@@ -27,6 +27,7 @@ class ArticleService{
     }
 
     static async deleteArticle(article : IArticle){
+        console.log(`Deleting article with id: ${article.id}`)
         const articleRef = doc(db,'articles',article.id.toString())
         await deleteDoc(articleRef)
         .then(() =>{
