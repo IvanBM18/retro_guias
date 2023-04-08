@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import NavBar from "@/layouts/header/navBar";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ArticleModal from "./component/articleModal";
 
 import { EditButton } from "./component/editButton";
@@ -43,7 +43,8 @@ export default function DasboardEntries() {
   const [showArticleModal, setShowArticleModal] = useState<boolean>(false);
   const [editArticleModal, setEditArticleModal] = useState<boolean>(false);
   //array of articles
-  const [articles, setArticles] = useState<article[]>(dummyData);
+  const [articles, setArticles] = useState<article[]>([]);
+  const dataFetchedRef = useRef(false);
   //article to edit
   const [article, setArticle] = useState<article>({
     id: -1,
@@ -54,13 +55,22 @@ export default function DasboardEntries() {
 
   const onOpenArticleModal = (id: any) => {
     setEditArticleModal(true);
-    setArticle(articles[id]);
+    setArticle(articles[articles.findIndex((art) => art.id === id)]);
     setShowArticleModal(true);
   };
 
   const onCloseArticleModal = () => {
     setShowArticleModal(false);
   };
+
+  useEffect(()=>{
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    ArticleService.fetchAll().then(()=>{
+      setArticles([...ArticleService.articleList.sort()]);
+    });
+    // console.log([...ArticleService.articleList]);
+  },[])
 
   return (
     <>
@@ -315,6 +325,11 @@ export default function DasboardEntries() {
                               <EditButton />
                             </button>
                             {/* Delete button */}
+                            <button
+                              onClick={() => {
+                                ArticleService.deleteArticle(article);
+                              }}
+                            ></button>
                             <DeleteButton />
                             {/* See details button */}
                             <SeeRowButton />
