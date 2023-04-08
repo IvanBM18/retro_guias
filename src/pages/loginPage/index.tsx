@@ -21,14 +21,13 @@ function LoginPage() {
     router.push('/landingPage')
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    AuthService.auth.onAuthStateChanged( () =>{
+      router.push('/dashboardPage')
+      router.forward();
+    })
     await AuthService.login({email:email,password:password});
-    if(AuthService.user){
-      console.log(AuthService.user.uid);
-      await UserService.getUserName(AuthService.user.uid);
-      router.push("/landingPage");
-    }
   };
 
   return (
@@ -55,7 +54,7 @@ function LoginPage() {
               </h2>
             </section>
 
-            <form className="mt-8 space-y-2" onSubmit={handleSubmit}>
+            <form className="mt-8 space-y-2" onSubmit={handleLogin}>
               {/* Email Textbox */}
               <div className="rounded-md shadow-sm -space-y-px">
                 <label htmlFor="email_adress" className="text-white mb-2">

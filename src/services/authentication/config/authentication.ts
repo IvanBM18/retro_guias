@@ -1,6 +1,7 @@
-import {getAuth} from "firebase/auth";
-import fireBaseApp from "@/services/fbase/firebaseApp";
+import {User, getAuth, onAuthStateChanged} from "firebase/auth";
+import fireBaseApp from "@/services/firebase/firebaseApp";
 // console.log(app);
 const auth = getAuth(fireBaseApp);
+
 
 export default auth;

@@ -7,18 +7,18 @@ class ArticleService{
     static articleList: IArticle[] = [];
 
     static async fetchAll() {
+        this.articleList = []
         console.log('Fetching for articles . . .')
         const query = await getDocs(collection(db,'articles'));
-        query.forEach((art) => {
-            if(!this.articleList.includes(art.data() as IArticle))
-                this.articleList.push(art.data() as IArticle)
+        query.forEach((article) => {
+            if(!this.articleList.includes(article.data() as IArticle))
+                this.articleList.push(article.data() as IArticle)
         })
     }
 
     static async postArticle(article : IArticle){
         console.log('Posting Article ...')
         await setDoc(doc(db,'articles',article.id.toString()),article)
-        console.log(`Article wirtten with id: ${article.id.toString()}`);
     }
 
     static async updateArticle(article : IArticle){

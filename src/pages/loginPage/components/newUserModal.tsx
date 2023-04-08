@@ -12,7 +12,6 @@ const NewUserModal = (props: newUserProps) => {
   const [isLoading,setLoading] = useState<boolean>(false);
   const [name,setName] = useState<string>("");
   const [email,setEmail] = useState<string>("");
-  const [userId, setuserId] = useState<string>("");
   const [password,setPassword] = useState<string>("");
 
   // const meetsRequierements= (pwd : string) => {
@@ -27,14 +26,13 @@ const NewUserModal = (props: newUserProps) => {
       email:email,
       password:password,
     };
-    await AuthService.createAccount(newUser,name);
-    if(AuthService.user){
-      setuserId(AuthService.user.uid);
-      console.log(`User created, with id: ${AuthService.user.uid}`);
+    AuthService.auth.onAuthStateChanged( () => {
+      setLoading(false);
       props.onClose();
-      
-    } 
-    setLoading(false);
+    }) 
+    await AuthService.createAccount(newUser,name);
+    
+    
   } 
 
   const onClose = () =>{

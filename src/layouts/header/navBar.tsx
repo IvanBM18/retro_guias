@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import AuthService from "@/services/authentication/authService";
+import auth from "@/services/authentication/config/authentication";
 
 //TODO: Add theme switch
 const NavBar = () => {
-  const [isOpenMobileMenu, setMobileMenu] = useState<Boolean>(false);
+  const [isOpenMobileMenu, setMobileMenu] = useState<boolean>(false);
+  const [isUserLogin,setUserLogin] = useState<boolean>(false);
 
   useEffect(() => {
     return (window.onscroll = function () {
@@ -76,7 +78,7 @@ const NavBar = () => {
               <div className="flex gap-4 font-bold text-center  ">
                 <Link href="/landingPage">
                   <img
-                    className="w-auto h- sm:h-9 md:i "
+                    className="w-auto h-9 sm:h-9 "
                     src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
                     alt="Logo Retro Wiki"
                   />
@@ -149,24 +151,32 @@ const NavBar = () => {
                 >
                   Contacto
                 </Link>
-                <Link
-                  href="/loginPage"
-                  className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
-                >
-                  {AuthService.user ? 'Cerrar Sesion' : 'Iniciar sesión'}
-                </Link>
+                <button
+                onClick={() =>{
+                  if(!isUserLogin) return;
+                  AuthService.logOut();
+                }}>
+                  <Link
+                    href="/loginPage"
+                    className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
+                  >
+                    {isUserLogin ? 'Cerrar Sesion' : 'Iniciar sesión'}
+                  </Link>
+                </button>
+                
+                
                 <Link
                   href="/aboutPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
                   Acerca de
                 </Link>
-                <a
-                  href="dashboardPage"
+                {isUserLogin && <Link
+                  href="/dashboardPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
                   DashBoard
-                </a>
+                </Link>}
 
                 
               </div>
