@@ -1,4 +1,4 @@
-import IArticle from "../../../models/typescriptModels/article";
+import IArticle from "../../../models/article";
 import db from "./config/dbProvider";
 import { collection, addDoc, FirestoreError, getDocs, doc, setDoc, updateDoc, deleteDoc, QuerySnapshot, DocumentData } from "firebase/firestore";
 

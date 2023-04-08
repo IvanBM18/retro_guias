@@ -1,7 +1,7 @@
 import React, { Fragment, ReactElement, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import AuthService from '@/services/authentication/authService'
-import UserCredentials from '../../../../models/typescriptModels/user'
+import UserCredentials from '../../../../models/user'
 import UserService from '@/services/database/userService'
 interface newUserProps {
   onClose: () => void

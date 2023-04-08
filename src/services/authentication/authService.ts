@@ -1,5 +1,5 @@
 import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import UserCredentials from "../../../models/typescriptModels/user";
+import UserCredentials from "../../../models/user";
 import auth from "./config/authentication";
 import UserService from "../database/userService";
 

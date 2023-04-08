@@ -1,4 +1,4 @@
-import { User } from "../../../models/typescriptModels/user";
+import { User } from "../../../models/user";
 import { collection, addDoc, FirestoreError, getDocs, doc, setDoc } from "firebase/firestore";
 import  db from "./config/dbProvider";
 

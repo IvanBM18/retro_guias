@@ -8,7 +8,7 @@ import { EditButton } from "./component/editButton";
 import { DeleteButton } from "./component/deleteButton";
 import { SeeRowButton } from "./component/seeRowButton";
 import ArticleService from "@/services/database/articleService";
-import IArticle from "../../../models/typescriptModels/article";
+import IArticle from "../../../models/article";
 
 
 const dummyData = [
@@ -62,8 +62,9 @@ export default function DasboardEntries() {
   const fetchArticles = () =>{
     ArticleService.fetchAll().then(()=>{
       setArticles([...ArticleService.articleList]);
+      setIsLoading(false);
     });
-    setIsLoading(false);
+    
   }
 
   useEffect(()=>{
