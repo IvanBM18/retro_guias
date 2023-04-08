@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import AuthService from "@/services/authentication/authService";
 
 //TODO: Add theme switch
 const NavBar = () => {
@@ -152,7 +153,7 @@ const NavBar = () => {
                   href="/loginPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >
-                  Iniciar sesión
+                  {AuthService.user ? 'Cerrar Sesion' : 'Iniciar sesión'}
                 </Link>
                 <Link
                   href="/aboutPage"

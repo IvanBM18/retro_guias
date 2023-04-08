@@ -19,43 +19,21 @@ const NewUserModal = (props: newUserProps) => {
   //   if(pwd.length < 8) return false;
   //   return false;
   // }
-  const submitToDB = async () => {
-    fetch('/api/users', {
-      method:'POST',
-      body: JSON.stringify({email:email,
-        password:password,
-        id: userId,
-        name:name}),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response : Response) => {
-      if(response.ok){
-        console.log('USUARIO EN DB')
-      }else{
-        console.log('DB USER response not OK')
-      }
-    }).catch((err : Error) =>{
-      console.error(err);
-    });
-  }
 
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
     setLoading(true);
     let newUser :UserCredentials = {
       email:email,
-      password:password
+      password:password,
     };
-    await AuthService.createAccount(newUser);
+    await AuthService.createAccount(newUser,name);
     if(AuthService.user){
       setuserId(AuthService.user.uid);
-      await UserService.registerUserName({name:name,id:AuthService.user.uid,...newUser})
+      console.log(`User created, with id: ${AuthService.user.uid}`);
       props.onClose();
-      console.log("-USUARIO CREADO");
+      
     } 
-
-    
     setLoading(false);
   } 
 

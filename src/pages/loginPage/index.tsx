@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
 import NewUserModal from "./components/newUserModal";
 import AuthService from "@/services/authentication/authService";
+import UserService from "@/services/database/userService";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,16 +18,17 @@ function LoginPage() {
 
   const closeNewuserModal = () => {
     setOpenNewUserModal(false);
+    router.push('/landingPage')
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    AuthService.login({email:email,password:password});
+    await AuthService.login({email:email,password:password});
     if(AuthService.user){
       console.log(AuthService.user.uid);
+      await UserService.getUserName(AuthService.user.uid);
       router.push("/landingPage");
     }
-    
   };
 
   return (

@@ -1,22 +1,38 @@
 import { User } from "../../../models/typescriptModels/user";
-import { collection, addDoc, FirestoreError, doc } from "firebase/firestore";
-import db from "./config/dbProvider";
+import { collection, addDoc, FirestoreError, getDocs, doc, setDoc } from "firebase/firestore";
+import  db from "./config/dbProvider";
 
 class UserService{
+    static userName = '';
 
     static async registerUserName(user : User){
-      await addDoc(collection(db,"users"),{name:user.name,id:user.id})
+      const userRef = doc(db,'users',user.id);
+      setDoc(userRef,{name:user.name,id:user.id},{merge:true})
         .then(() =>{
-          console.log("User Document Writen");
+          console.log(`New User Register with name: ${user.name}`)
         })
         .catch((e : FirestoreError) =>{
-          console.error(`[ERROR] adding document, more info: ${e}`);
-        })
+          console.error(`[ERROR]: en registro de usuario. ${e.message}`)
+        });
+      // await addDoc(collection(db,`users/${user.name}`),{name:user.name,id:user.id})
+      //   .then(() =>{
+      //     console.log("User Document Writen");
+      //   })
+      //   .catch((e : FirestoreError) =>{
+      //     console.error(`[ERROR] adding document, more info: ${e}`);
+      //   })
     }
 
-    // async getUserName(user : User){
-    //   const docRef = doc(db,"users",);
-    // }
+    static async getUserName(id : string){
+      const docList = await getDocs(collection(db,"users"));
+      console.log(docList);
+      docList.forEach((doc) =>{
+        console.log(doc.data());
+        if(doc.data().id == id){
+          this.userName = doc.data().id;
+        }
+      })
+    }
 
 }
 
