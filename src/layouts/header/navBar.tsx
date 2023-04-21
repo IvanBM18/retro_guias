@@ -27,7 +27,6 @@ const NavBar = () => {
   }, []);
 
   const showMobileMenu = () => {
-    // console.log(e);
     const menu: HTMLElement | null = document.querySelector("#mobileMenu");
     console.log(menu);
     if (!menu) return;

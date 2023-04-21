@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import auth from '../authentication/config/authentication';
+import { DeleteButton } from '@/pages/dashboardPage/component/deleteButton';
+import LoginPage from '@/pages/loginPage';
 
 const withAuth = (Component: React.ComponentType) => {
   const AuthComponent = (props: any) => {
@@ -11,9 +13,10 @@ const withAuth = (Component: React.ComponentType) => {
       if (!isAuthenticated) {
         router.push('/loginPage');
       }
-    }, [isAuthenticated, router]);
+    }, [router,isAuthenticated]);
 
-    return isAuthenticated ? <Component {...props} /> : null;
+    return isAuthenticated ? <Component {...props} /> : <LoginPage/>
+    ;
   };
 
   return AuthComponent;
