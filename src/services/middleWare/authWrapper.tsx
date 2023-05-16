@@ -1,22 +1,20 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import auth from '../authentication/config/authentication';
-import { DeleteButton } from '@/pages/dashboardPage/component/deleteButton';
-import LoginPage from '@/pages/loginPage';
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import LoginPage from "@/pages/loginPage";
+import useUser from "@/lib/useUser";
 
 const withAuth = (Component: React.ComponentType) => {
   const AuthComponent = (props: any) => {
     const router = useRouter();
-    const isAuthenticated = auth.currentUser; // replace with your authentication check
+    const {user} = useUser({redirectIfFound:false, redirectTo:'/dashboardPage'}); // replace with your authentication check
 
     useEffect(() => {
-      if (!isAuthenticated) {
-        router.push('/loginPage');
+      if (!user) {
+        router.push("/loginPage");
       }
-    }, [router,isAuthenticated]);
+    }, [router, user]);
 
-    return isAuthenticated ? <Component {...props} /> : <LoginPage/>
-    ;
+    return user ? <Component {...props} /> : <LoginPage />;
   };
 
   return AuthComponent;

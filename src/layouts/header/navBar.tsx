@@ -1,12 +1,12 @@
+import useUser from "@/lib/useUser";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import AuthService from "@/services/authentication/authService";
-import auth from "@/services/authentication/config/authentication";
 
 //TODO: Add theme switch
 const NavBar = () => {
   const [isOpenMobileMenu, setMobileMenu] = useState<boolean>(false);
-  const [isUserLogin,setUserLogin] = useState<boolean>(false);
+  const {user} = useUser({redirectTo: '/login', redirectIfFound: false})
 
   useEffect(() => {
     return (window.onscroll = function () {
@@ -76,7 +76,9 @@ const NavBar = () => {
             <div className="flex items-center justify-between cursor-pointer">
               <div className="flex gap-4 font-bold text-center  ">
                 <Link href="/landingPage">
-                  <img
+                  <Image
+                    height={36}
+                    width={36}
                     className="w-auto h-9 sm:h-9 "
                     src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
                     alt="Logo Retro Wiki"
@@ -152,14 +154,14 @@ const NavBar = () => {
                 </Link>
                 <button
                 onClick={() =>{
-                  if(!isUserLogin) return;
-                  AuthService.logOut();
+                  if(!user || !user.isLoggedIn) return;
+                  fetch('/api/logout')
                 }}>
                   <Link
                     href="/loginPage"
                     className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                   >
-                    {isUserLogin ? 'Cerrar Sesion' : 'Iniciar sesión'}
+                    {(user && user.isLoggedIn) ? 'Cerrar Sesion' : 'Iniciar sesión'}
                   </Link>
                 </button>
                 
@@ -170,7 +172,7 @@ const NavBar = () => {
                 >
                   Acerca de
                 </Link>
-                {isUserLogin && <Link
+                {(user && user.isLoggedIn) && <Link
                   href="/dashboardPage"
                   className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                 >

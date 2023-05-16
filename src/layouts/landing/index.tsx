@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react'
 import NavBar from '../header/navBar'
 import Head from 'next/head'
-import LandingPage from '@/pages/landingPage';
 
 type Props = {
   children?: JSX.Element;

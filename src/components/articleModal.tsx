@@ -1,35 +1,24 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import IArticle from "../../models/article";
 
 interface articleModalProps {
-  onClose: () => void;
-  article?: {
-    id: number;
-    title: string;
-    description: string;
-    createdAt: string;
-  };
-  setNewArticle?: (article: article) => void;
+  onClose(): void;
+  setNewArticle(art : IArticle): void;
+  article:  IArticle;
 }
 
-type article = {
-  id: number;
-  title: string;
-  description: string;
-  createdAt: string;
-};
-
-const ArticleModal = (props: articleModalProps) => {
+export default function ArticleModal(props: articleModalProps){
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const [article, setArticle] = useState<article>({
+  const [article, setArticle] = useState<IArticle>({
     id: props.article?.id || -1,
     title: props.article?.title || "",
     description: props.article?.description || "",
     createdAt: props.article?.createdAt || "",
   });
 
-  const onClose = (e : React.FormEvent<HTMLFormElement>) => {
+  const onCloseModal = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(false);
     const currDate = new Date().toLocaleDateString();
@@ -69,7 +58,7 @@ const ArticleModal = (props: articleModalProps) => {
               aria-hidden="true"
             >
               {" "}
-              &#8203;{" "}
+                {" "}
             </span>
             <Transition.Child
               as={Fragment}
@@ -88,7 +77,7 @@ const ArticleModal = (props: articleModalProps) => {
                   {props.article?.title !== "" ? "Editar" : "Crear"} Articulo
                 </Dialog.Title>
 
-                <form className="w-full" onSubmit={onClose}>
+                <form className="w-full" onSubmit={onCloseModal}>
                   {/* Title TextBox */}
                   <div className="w-full px-3 mb-3">
                     <label
@@ -148,5 +137,3 @@ const ArticleModal = (props: articleModalProps) => {
     </>
   );
 };
-
-export default ArticleModal;

@@ -1,4 +1,4 @@
-export const DeleteButton = () => {
+const DeleteButton = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,3 +16,5 @@ export const DeleteButton = () => {
     </svg>
   );
 };
+
+export default DeleteButton;

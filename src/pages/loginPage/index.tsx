@@ -1,11 +1,9 @@
-import NavBar from "@/layouts/header/navBar";
 import React, { useState } from "react";
-import Head from "next/head";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
 import NewUserModal from "./components/newUserModal";
-import AuthService from "@/services/authentication/authService";
-import UserService from "@/services/database/userService";
+import fetchJson , {FetchError} from "../../lib/fetchJson";
+import useUser from "../../lib/useUser";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -14,6 +12,9 @@ function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [openNewUserModal, setOpenNewUserModal] = useState<boolean>(false);
+
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const { mutateUser } = useUser({ redirectTo: "/dashboardPage", redirectIfFound: true });
   const router = useRouter();
 
   const closeNewuserModal = () => {
@@ -23,11 +24,22 @@ function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    AuthService.auth.onAuthStateChanged( () =>{
-      router.push('/dashboardPage')
-      router.forward();
-    })
-    await AuthService.login({email:email,password:password});
+    const body = { email, password };
+    try{
+      mutateUser(
+        await fetchJson("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+      )
+    }catch (error) {
+      if (error instanceof FetchError) {
+        setErrorMsg(error.data.message)
+      } else {
+        console.error('An unexpected error happened:', error)
+      }
+    }
   };
 
   return (
@@ -47,7 +59,8 @@ function LoginPage() {
               </h2>
             </section>
 
-            <form className="mt-8 space-y-2" onSubmit={handleLogin}>
+            <form className="mt-8 space-y-2" 
+            onSubmit={handleLogin}>
               {/* Email Textbox */}
               <div className="rounded-md shadow-sm -space-y-px">
                 <label htmlFor="email_adress" className="text-white mb-2">

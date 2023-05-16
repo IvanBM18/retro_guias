@@ -3,13 +3,18 @@ import DasboardEntries from "./dashboardEntries";
 import DashboardLayout from "@/layouts/dashboard";
 import { ReactElement, ReactNode, useState } from "react";
 import { NextPageWithLayout } from "../_app";
+import useUser from "../../lib/useUser";
 
 const Dashboard : NextPageWithLayout= () => {
-  const [viewEntries, setViewEntries] = useState<boolean>(true)
+  const {user} = useUser({redirectTo: '/login', redirectIfFound: false})
+
+  if(!user || user.isLoggedIn === false){
+    return (
+    <h1 className="text-center">Incia sesion para ver esta pagina</h1>
+    )
+  }
   return (
-    <>
-      <DasboardEntries/>
-    </>
+    <DasboardEntries />
   )
 };
 
@@ -21,5 +26,5 @@ Dashboard.getLayout = function getLayout(page : ReactElement) : ReactNode{
   )
 }
 
-// export default withAuth(DashboardLayout);
+// export default withAuth(Dashboard);
 export default Dashboard;

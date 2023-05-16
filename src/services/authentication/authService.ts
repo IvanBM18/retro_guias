@@ -1,53 +1,53 @@
-import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import UserCredentials from "../../../models/user";
-import auth from "./config/authentication";
-import UserService from "../database/userService";
+import fireBaseApp from "../firebase/firebaseApp";
 
 class AuthService{
   static user : User;
-  static isUserLogedIn : boolean = false;
-  static auth = auth;
+  static auth = getAuth(fireBaseApp);
 
-  static async createAccount(newUser : UserCredentials, name : string){
+  static async signup(newUser : UserCredentials, name : string): Promise<User>{
     // console.log(newUser);
-    createUserWithEmailAndPassword(auth,newUser.email,newUser.password)
-      .then( (userCredentials : UserCredential) =>{
-        updateProfile(auth.currentUser!, {displayName:name})
-        this.user = userCredentials.user;
-        this.isUserLogedIn = true;
+    createUserWithEmailAndPassword(this.auth,newUser.email,newUser.password)
+      .then((userCredentials : UserCredential) =>{
+        updateProfile(this.auth.currentUser!, {displayName:name})
+        return this.login(newUser);
         // UserService.registerUserName({id: this.user.uid, name:name,...newUser})
       })
       .catch((error : AuthError) => {
         console.error(`[ERROR CODE ${error.code}] : ${error.message}`);
       })
-      
-      this.login(newUser);
+      return this.user;
       
   }
 
-  static async login(credentials : UserCredentials){
-    await signInWithEmailAndPassword(auth,credentials.email,credentials.password)
+  static async login(credentials : UserCredentials) : Promise<User>{
+    await signInWithEmailAndPassword(this.auth,credentials.email,credentials.password)
       .then((userCredentials : UserCredential) =>{
-        this.user = userCredentials.user;        
+        this.user = userCredentials.user;
+        return this.user; 
       })
       .catch((error : AuthError) => {
         console.error(`[ERROR CODE ${error.code}] : ${error.message}`);
       })
-      const token = await auth.currentUser?.getIdToken()
-      if(token){
-        console.log('Login Suffesful!');
-        localStorage.setItem('authToken', token);
-      }
+      return this.user;
   }
 
-  static async logOut(){
-    await signOut(auth).then(()=>{
+  static async logout(){
+    await signOut(this.auth).then(()=>{
       console.log('Session clossed!');
       localStorage.removeItem('authToken');
     })
     .catch((e : AuthError) =>{
       console.error(`[ERROR] while trying to log out: ${e.message}`)
     })
+  }
+
+  static async getCurrentUser(){
+    if(this.auth.currentUser){
+      return this.auth.currentUser;
+    }
+    return null;
   }
 
 }

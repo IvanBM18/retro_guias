@@ -1,16 +1,13 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import ArticleModal from "./component/articleModal";
+import ArticleModal from "@/components/articleModal";
 
-import { EditButton } from "./component/editButton";
-import { DeleteButton } from "./component/deleteButton";
-import { SeeRowButton } from "./component/seeRowButton";
+import EditButton from "./component/editButton";
+import DeleteButton from "./component/deleteButton";
+import SeeRowButton from "./component/seeRowButton";
 import ArticleService from "@/services/database/articleService";
 import IArticle from "../../../models/article";
-import SideBar from "./component/sideBar";
-import { error } from "console";
-
 
 const dummyData : IArticle[] = [
   {

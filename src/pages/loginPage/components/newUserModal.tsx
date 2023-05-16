@@ -1,8 +1,8 @@
 import React, { Fragment, ReactElement, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import AuthService from '@/services/authentication/authService'
 import UserCredentials from '../../../../models/user'
-import UserService from '@/services/database/userService'
+import useUser from '../../../lib/useUser'
+import fetchJson from '../../../lib/fetchJson'
 interface newUserProps {
   onClose: () => void
 }
@@ -13,6 +13,7 @@ const NewUserModal = (props: newUserProps) => {
   const [name,setName] = useState<string>("");
   const [email,setEmail] = useState<string>("");
   const [password,setPassword] = useState<string>("");
+  const {mutateUser} = useUser({redirectTo: '/dashboardPage',redirectIfFound: true});
 
   // const meetsRequierements= (pwd : string) => {
   //   if(pwd.length < 8) return false;
@@ -22,16 +23,20 @@ const NewUserModal = (props: newUserProps) => {
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
     setLoading(true);
+    const body= {name,email,password};
     let newUser :UserCredentials = {
       email:email,
       password:password,
     };
-    AuthService.auth.onAuthStateChanged( () => {
-      setLoading(false);
-      props.onClose();
-    }) 
-    await AuthService.createAccount(newUser,name);
-    
+    try{
+      mutateUser(await fetchJson('/api/signup',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body)
+      }))
+    }catch(error){
+      console.error('[ERROR]: An unexpected error happenedin signup:', error)
+    }
     
   } 
 

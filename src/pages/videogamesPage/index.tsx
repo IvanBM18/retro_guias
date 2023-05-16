@@ -23,7 +23,7 @@ export default function Contacto() {
             <div className="flex-1">
               <ul className="pt-2 pb-4 space-y-1 text-sm">
                 <li className="rounded-sm">
-                  <a
+                  <Link
                     href="/landingPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
@@ -42,10 +42,10 @@ export default function Contacto() {
                       />
                     </svg>
                     <span>Home</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
-                  <a
+                  <Link
                     href="/dashboardPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
@@ -64,10 +64,10 @@ export default function Contacto() {
                       />
                     </svg>
                     <span>Entradas</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
-                  <a
+                  <Link
                     href="/videogamesPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
@@ -86,7 +86,7 @@ export default function Contacto() {
                       />
                     </svg>
                     <span>Videojuegos</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="rounded-sm">
                   <a
@@ -174,7 +174,7 @@ export default function Contacto() {
                       </th>
                       <th
                         className="px-6 py-3 text-sm text-left text-gray-500 border-b border-gray-200 bg-gray-50"
-                        colspan="3"
+                        colSpan= {3}
                       >
                         acciones
                       </th>

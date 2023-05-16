@@ -1,12 +1,12 @@
-
 // Your web app's Firebase configuration
 export const firebaseConfig = {
-  apiKey: 'AIzaSyAsnNlvdEy2x4moqeEy6mlMPl1C4n4mIC4',
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "retro-wiki.firebaseapp.com",
   projectId: "retro-wiki",
   storageBucket: "retro-wiki.appspot.com",  
   databaseURL: "https://retro-wiki-default-rtdb.firebaseio.com",
-  messagingSenderId: '432230053514',
-  appId: '1:432230053514:web:68a7ec2b4ff77f641e1f73'
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
+
 
