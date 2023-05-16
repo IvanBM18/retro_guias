@@ -4,7 +4,7 @@ import { User } from '../../models/user'
 
 export const sessionOptions: IronSessionOptions = {
   password: process.env.REACT_APP_SECRET_COOKIE_PASSWORD as string,
-  cookieName: 'iron-session/examples/next.js',
+  cookieName: 'iron-session/retro-guias',
   // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',

@@ -1,8 +1,7 @@
 //TODO: Fix image layout on mobile
 //TODO: Create an article card component
-import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import NavBar from "@/layouts/header/navBar";
+import Image from "next/image";
 
 
 export default function LandingPage() {
@@ -21,7 +20,7 @@ export default function LandingPage() {
             {/* Article Card */}
             <article className="group w-1/5">
               <a href="#">
-                <img
+                <Image
                   alt="toy story 2"
                   src="https://i0.wp.com/www.senpai.com.mx/wp-content/uploads/2020/08/Retro-Resena-Toy-Story-2-Buzz-Lightyear-to-the-Rescue-1.jpg?w=1280&ssl=1"
                   className="ml-2 h-56 rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
@@ -45,7 +44,7 @@ export default function LandingPage() {
             {/* Article Card */}
             <article className="group w-1/5">
               <a href="#">
-                <img
+                <Image
                   alt="toy story 2"
                   src="https://i0.wp.com/www.senpai.com.mx/wp-content/uploads/2020/08/Retro-Resena-Toy-Story-2-Buzz-Lightyear-to-the-Rescue-1.jpg?w=1280&ssl=1"
                   className="ml-2 h-56 rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
@@ -69,7 +68,7 @@ export default function LandingPage() {
             {/* Article Card */}
             <article className="group w-1/5">
               <a href="#">
-                <img
+                <Image
                   alt="toy story 2"
                   src="https://i0.wp.com/www.senpai.com.mx/wp-content/uploads/2020/08/Retro-Resena-Toy-Story-2-Buzz-Lightyear-to-the-Rescue-1.jpg?w=1280&ssl=1"
                   className="ml-2 h-56 rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"

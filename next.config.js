@@ -14,6 +14,13 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'i0.wp.com/www.senpai.com.mx',
+        port: '',
+        pathname: '/**',
+      },
+
     ],
   },
 }

@@ -6,7 +6,7 @@ import { NextPageWithLayout } from "../_app";
 import useUser from "../../lib/useUser";
 
 const Dashboard : NextPageWithLayout= () => {
-  const {user} = useUser({redirectTo: '/login', redirectIfFound: false})
+  const {user} = useUser({redirectTo: '/dashboardPage', redirectIfFound: false})
 
   if(!user || user.isLoggedIn === false){
     return (
