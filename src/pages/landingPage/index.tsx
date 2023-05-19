@@ -2,7 +2,52 @@
 //TODO: Create an article card component
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import IArticle from "../../../models/article";
+import Link from "next/link";
 
+const dummyData: IArticle[] = [
+  {
+    id: 0,
+    title: "Hola Edgar",
+    description: "soy un texto de prueba",
+    createdAt: "2023-05-19",
+  },
+  {
+    id: 1,
+    title: "Ke pedo",
+    description: "soy un texto de prueba dos",
+    createdAt: "2023-05-19",
+  },
+  {
+    id: 2,
+    title: "SS",
+    description: "soy un texto de prueba 3s",
+    createdAt: "2023-05-19",
+  },
+];
+
+const DummyComponent = ({ data }: { data: IArticle[] }) => {
+  return (
+    <>
+      {data.map((article) => (
+        <article key={article.id} className="group w-1/5">
+          <div className="p-4">
+            <a href="#">
+              <h3 className="text-lg font-medium text-white">
+                {article.title}
+              </h3>
+            </a>
+            <p className="mt-2 mb-8 text-sm text-ellipsis overflow-hidden ... white-space: nowrap w-auto leading-relaxed text-gray-500 line-clamp-3">
+              {article.description}
+              <span className="flow-root">{article.createdAt}</span>
+            </p>
+            <p className="mt-2 mb-8 text-sm text-ellipsis overflow-hidden ... white-space: nowrap w-auto leading-relaxed text-gray-500 line-clamp-3"></p>
+          </div>
+        </article>
+      ))}
+    </>
+  );
+};
 
 export default function LandingPage() {
   return (
@@ -17,78 +62,8 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="flex justify-center mb-24  py-32 lg:flex lg:h-20 lg:items-center gap-28 ">
-            {/* Article Card */}
-            <article className="group w-1/5">
-              <a href="#">
-                <Image
-                  alt="toy story 2"
-                  src="https://i0.wp.com/www.senpai.com.mx/wp-content/uploads/2020/08/Retro-Resena-Toy-Story-2-Buzz-Lightyear-to-the-Rescue-1.jpg?w=1280&ssl=1"
-                  className="ml-2 h-56 rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
-                />
-              </a>
-              {/* Ttitle */}
-              <div className="p-4">
-                <a href="#">
-                  <h3 className="text-lg font-medium text-white">
-                    Toy Story 2
-                  </h3>
-                </a>
-                {/* Description */}
-                <p className=" mt-2 mb-8  text-sm text-ellipsis overflow-hidden ... white-space: nowrap  w-auto leading-relaxed text-gray-500 line-clamp-3">
-                  Juego de playstation 1 basado en la pelicula de Toy Story 2 de
-                  1999 Juego de playstation 1 basado en la pelicula de Toy Story
-                  2
-                </p>
-              </div>
-            </article>
-            {/* Article Card */}
-            <article className="group w-1/5">
-              <a href="#">
-                <Image
-                  alt="toy story 2"
-                  src="https://i0.wp.com/www.senpai.com.mx/wp-content/uploads/2020/08/Retro-Resena-Toy-Story-2-Buzz-Lightyear-to-the-Rescue-1.jpg?w=1280&ssl=1"
-                  className="ml-2 h-56 rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
-                />
-              </a>
-              {/* Ttitle */}
-              <div className="p-4">
-                <a href="#">
-                  <h3 className="text-lg font-medium text-white">
-                    Toy Story 2
-                  </h3>
-                </a>
-                {/* Description */}
-                <p className="mt-2 mb-8  text-sm  white-space: nowrap overflow-hidden ...  w-auto leading-relaxed text-gray-500 line-clamp-3">
-                  Juego de playstation 1 basado en la pelicula de Toy Story 2 de
-                  1999 Juego de playstation 1 basado en la pelicula de Toy Story
-                  2
-                </p>
-              </div>
-            </article>
-            {/* Article Card */}
-            <article className="group w-1/5">
-              <a href="#">
-                <Image
-                  alt="toy story 2"
-                  src="https://i0.wp.com/www.senpai.com.mx/wp-content/uploads/2020/08/Retro-Resena-Toy-Story-2-Buzz-Lightyear-to-the-Rescue-1.jpg?w=1280&ssl=1"
-                  className="ml-2 h-56 rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
-                />
-              </a>
-              {/* Title */}
-              <div className="p-4">
-                <a href="#">
-                  <h3 className="text-lg font-medium text-white">
-                    Toy Story 2
-                  </h3>
-                </a>
-                {/* Description */}
-                <p className="mt-2 mb-8  text-sm  white-space: nowrap overflow-hidden ...  w-auto leading-relaxed text-gray-500 line-clamp-3">
-                  Juego de playstation 1 basado en la pelicula de Toy Story 2 de
-                  1999 Juego de playstation 1 basado en la pelicula de Toy Story
-                  2
-                </p>
-              </div>
-            </article>
+            {/* Use the DummyComponent to render the dummy data */}
+            <DummyComponent data={dummyData} />
           </div>
         </div>
         {/* Footer */}
@@ -186,7 +161,7 @@ export default function LandingPage() {
                   </a>
                   <a
                     className="text-white transition hover:text-white/75"
-                    href="https://github.com/IvanBM18/retro_wiki"
+                    href="https://github.com/IvanBM18/retro_guias"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -217,24 +192,24 @@ export default function LandingPage() {
                     aria-label="Footer About Nav"
                     className="mt-6 flex flex-col space-y-1"
                   >
-                    <a
+                    <Link
+                      href="/aboutPage"
                       className="text-white transition hover:text-white/75"
-                      // href="/"
                     >
                       Nosotros
-                    </a>
-                    <a
+                    </Link>
+                    <Link
+                      href="/aboutPage"
                       className="text-white transition hover:text-white/75"
-                      // href="/"
                     >
-                      Mision
-                    </a>
-                    <a
+                      Misión
+                    </Link>
+                    <Link
+                      href="/aboutPage/us"
                       className="text-white transition hover:text-white/75"
-                      // href="/"
                     >
                       Equipo
-                    </a>
+                    </Link>
                   </nav>
                 </div>
                 <div>
@@ -243,12 +218,12 @@ export default function LandingPage() {
                     aria-label="Footer Support Nav"
                     className="mt-6 flex flex-col space-y-1"
                   >
-                    <a
+                    <Link
+                      href="/contactoPage"
                       className="text-white transition hover:text-white/75"
-                      // href="/"
                     >
                       Contacto
-                    </a>
+                    </Link>
                   </nav>
                 </div>
               </div>
@@ -279,5 +254,5 @@ export default function LandingPage() {
         </footer>
       </div>
     </>
-  )
+  );
 }
