@@ -1,5 +1,5 @@
 import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import UserCredentials from "../../../models/user";
+import UserCredentials from "../../models/user";
 import fireBaseApp from "../firebase/firebaseApp";
 
 class AuthService{

@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import UserCredentials from '../../../../models/user'
+import UserCredentials from '../../../models/user'
 import useUser from '../../../lib/useUser'
 import fetchJson from '../../../lib/fetchJson'
 interface newUserProps {

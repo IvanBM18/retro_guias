@@ -2,7 +2,7 @@
 //TODO: Create an article card component
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import IArticle from "../../../models/article";
+import IArticle from "../../models/article";
 import Link from "next/link";
 
 const dummyData: IArticle[] = [
@@ -61,7 +61,7 @@ export default function LandingPage() {
               </h1>
             </div>
           </div>
-          <div className="flex justify-center mb-24  py-32 lg:flex lg:h-20 lg:items-center gap-28 ">
+          <div className="flex justify-center mb-24 py-32 lg:flex lg:h-20 lg:items-center gap-28 ">
             {/* Use the DummyComponent to render the dummy data */}
             <DummyComponent data={dummyData} />
           </div>

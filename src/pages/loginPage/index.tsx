@@ -37,7 +37,7 @@ function LoginPage() {
       if (error instanceof FetchError) {
         setErrorMsg(error.data.message)
       } else {
-        console.error('An unexpected error happened:', error)
+        console.error('[ERROR]: An unexpected error happened in login: ', errorMsg)
       }
     }
   };

@@ -1,4 +1,4 @@
-import UserCredentials, { User } from '../../../models/user'
+import UserCredentials, { User } from '../../models/user'
 
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from '../../lib/session'

@@ -1,4 +1,4 @@
-import UserCredentials, { User } from '../../../models/user'
+import UserCredentials, { User } from '../../models/user'
 
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { sessionOptions } from '../../lib/session'
@@ -11,7 +11,7 @@ async function signupRoute(req: NextApiRequest, res: NextApiResponse){
     const fbUser = await AuthService.signup({email, password} as UserCredentials,name)
     if(!fbUser) throw new Error('[ERROR] while trying to create user');
 
-    const user = { isLoggedIn: true, name, } as User
+    const user = { isLoggedIn: true, name } as User
     req.session.user = user
     await req.session.save()
     res.json(user)

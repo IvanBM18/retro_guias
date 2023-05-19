@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import IArticle from "../../models/article";
+import IArticle from "../models/article";
 
 interface articleModalProps {
   onClose(): void;

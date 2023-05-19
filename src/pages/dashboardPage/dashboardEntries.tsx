@@ -7,7 +7,7 @@ import EditButton from "./component/editButton";
 import DeleteButton from "./component/deleteButton";
 import SeeRowButton from "./component/seeRowButton";
 import ArticleService from "@/services/database/articleService";
-import IArticle from "../../../models/article";
+import IArticle from "../../models/article";
 
 const dummyData : IArticle[] = [
   {

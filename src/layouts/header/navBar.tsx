@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 //TODO: Add theme switch
 const NavBar = () => {
   const [isOpenMobileMenu, setMobileMenu] = useState<boolean>(false);
-  const {user} = useUser({redirectTo: '/login', redirectIfFound: false})
+  const {user} = useUser({redirectTo: '/dashboardPage', redirectIfFound: false})
 
   useEffect(() => {
     return (window.onscroll = function () {
