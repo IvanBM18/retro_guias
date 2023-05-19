@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 
 const NavBar = () => {
   const [isOpenMobileMenu, setMobileMenu] = useState<boolean>(false);
-  const {user} = useUser({redirectTo: '/dashboardPage', redirectIfFound: false})
+  const {user} = useUser({redirectTo: '/landingPage', redirectIfFound: false})
 
   useEffect(() => {
     return (window.onscroll = function () {
@@ -160,7 +160,7 @@ const NavBar = () => {
                     href="/loginPage"
                     className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                   >
-                    {(user && user.isLoggedIn) ? 'Cerrar Sesion' : 'Iniciar sesión'}
+                    {(user && user.isLoggedIn) ? user.name : 'Iniciar sesión'}
                   </Link>
                 </button>
                 

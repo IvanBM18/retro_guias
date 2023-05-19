@@ -75,7 +75,7 @@ const DummyComponent = ({ data }: { data: IArticle[] }) => {
             </a>
             <p className="mt-2 mb-8 text-sm text-ellipsis overflow-hidden ... white-space: nowrap w-auto leading-relaxed text-gray-500 line-clamp-3">
               {article.description}
-              <span className="flow-root">{article.createdAt}</span>
+              <span className="flow-root">{article.createdBy}</span>
             </p>
             <p className="mt-2 mb-8 text-sm text-ellipsis overflow-hidden ... white-space: nowrap w-auto leading-relaxed text-gray-500 line-clamp-3"></p>
           </div>
@@ -119,7 +119,7 @@ export default function LandingPage() {
                   <a
                     href="#"
                     className="text-lg font-medium text-blue-600 dark:text-blue-300"
-                    tabindex="0"
+                    tabIndex={0}
                     role="link"
                   >
                     John Doe

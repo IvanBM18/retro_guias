@@ -1,4 +1,3 @@
-import withAuth from "@/services/middleWare/authWrapper";
 import DasboardEntries from "./dashboardEntries";
 import DashboardLayout from "@/layouts/dashboard";
 import { ReactElement, ReactNode, useState } from "react";

@@ -8,10 +8,11 @@ class AuthService{
 
   static async signup(newUser : UserCredentials, name : string): Promise<User>{
     // console.log(newUser);
-    createUserWithEmailAndPassword(this.auth,newUser.email,newUser.password)
+    await createUserWithEmailAndPassword(this.auth,newUser.email,newUser.password)
       .then((userCredentials : UserCredential) =>{
         updateProfile(this.auth.currentUser!, {displayName:name})
-        return this.login(newUser);
+        this.user = userCredentials.user;
+        return this.user;
         // UserService.registerUserName({id: this.user.uid, name:name,...newUser})
       })
       .catch((error : AuthError) => {
@@ -36,7 +37,6 @@ class AuthService{
   static async logout(){
     await signOut(this.auth).then(()=>{
       console.log('Session clossed!');
-      localStorage.removeItem('authToken');
     })
     .catch((e : AuthError) =>{
       console.error(`[ERROR] while trying to log out: ${e.message}`)

@@ -20,24 +20,22 @@ const NewUserModal = (props: newUserProps) => {
   //   return false;
   // }
 
-  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) =>{
+  const handleSignup = async (e : React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
     setLoading(true);
     const body= {name,email,password};
-    let newUser :UserCredentials = {
-      email:email,
-      password:password,
-    };
     try{
-      mutateUser(await fetchJson('/api/signup',{
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(body)
-      }))
+      mutateUser(
+        await fetchJson("/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+      )
     }catch(error){
-      console.error('[ERROR]: An unexpected error happenedin signup:', error)
+      console.error('[ERROR]: An unexpected error happened in signup:', error)
     }
-    
+    onClose();
   } 
 
   const onClose = () =>{
@@ -86,7 +84,7 @@ const NewUserModal = (props: newUserProps) => {
                   Registrate
                 </Dialog.Title>
 
-                <form className="w-full max-w-lg" onSubmit={handleSubmit} >
+                <form className="w-full max-w-lg" onSubmit={handleSignup} >
                   {/* Name TextBox */}
                   <div className="w-full px-3 mb-3">
                     <label htmlFor='grid-name' className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2">
