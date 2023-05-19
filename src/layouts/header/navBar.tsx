@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
-//TODO: Add theme switch
 const NavBar = () => {
   const [isOpenMobileMenu, setMobileMenu] = useState<boolean>(false);
   const {user} = useUser({redirectTo: '/dashboardPage', redirectIfFound: false})

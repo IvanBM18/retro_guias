@@ -1,13 +1,13 @@
-import React, { ReactElement } from 'react'
-import NavBar from '../header/navBar'
-import Head from 'next/head'
+import React, { ReactElement } from "react";
+import NavBar from "../header/navBar";
+import Head from "next/head";
+import Footer from "../footer/footer";
 
 type Props = {
   children?: JSX.Element;
 };
 
-
-const LandingLayout  = ({children} : Props) => {
+const LandingLayout = ({ children }: Props) => {
   return (
     <>
       <Head>
@@ -17,12 +17,11 @@ const LandingLayout  = ({children} : Props) => {
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
       <NavBar />
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
 // LandingPage.getLayout = function getLayout({page} : Props){
 //   return (
@@ -30,4 +29,4 @@ const LandingLayout  = ({children} : Props) => {
 //   )
 // }
 
-export default LandingLayout
+export default LandingLayout;

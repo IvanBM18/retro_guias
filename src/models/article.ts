@@ -4,7 +4,8 @@ export default interface IArticle{
     id:number,
     title:string,
     description:string,
-    createdAt: string,
+    createdBy: string,
+    image: string,
 }
 
 export interface ISignedArticle extends IArticle{
