@@ -1,5 +1,3 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import ArticleModal from "@/components/articleModal";
 
@@ -8,30 +6,20 @@ import DeleteButton from "./component/deleteButton";
 import SeeRowButton from "./component/seeRowButton";
 import ArticleService from "@/services/database/articleService";
 import IArticle from "../../models/article";
+import useUser from "@/lib/useUser";
 
 const dummyData : IArticle[] = [
   {
     id: 0,
-    title: "Hola Edgar",
-    description: "soy un texto de prueba",
+    title: "No hay articulos",
+    description: "Crea Articulos para que aparezcan aqui",
     createdAt: "2021-08-01",
-  },
-  {
-    id: 1,
-    title: "Ke pedo",
-    description: "soy un texto de prueba dos",
-    createdAt: "2021-08-01",
-  },
-  {
-    id: 2,
-    title: "SS",
-    description: "soy un texto de prueba 3s",
-    createdAt: "2021-08-01",
-  },
+    isDeleted: false,
+  }
 ];
 
 export default function DasboardEntries() {
-  const router = useRouter();
+  const { user } = useUser({ redirectTo: "", redirectIfFound: false });
   const [showArticleModal, setShowArticleModal] = useState<boolean>(false);
   const [editArticleModal, setEditArticleModal] = useState<boolean>(false);
   const [isLoading,setIsLoading] = useState<boolean>(false);
@@ -45,6 +33,7 @@ export default function DasboardEntries() {
     title: "",
     description: "",
     createdAt: "",
+    isDeleted: false,
   });
 
   const onOpenArticleModal = (id: any) => {
@@ -58,10 +47,11 @@ export default function DasboardEntries() {
   };
 
   const fetchArticles = () =>{
-    ArticleService.fetchAll().then(()=>{
-      setArticles([...ArticleService.articleList]);
+    ArticleService.fectchByUser(user!.id).then((articles)=>{
+      setArticles([...articles.filter((art)=>!art.isDeleted )]); 
+      if(articles.length === 0) setArticles([...dummyData])
     })
-  .catch(error => {console.error(`[ERROR] ${error}`)});
+    .catch(error => {console.error(`[ERROR] in dashboard fetching: ${error}`)});
     setIsLoading(false);
   }
 
@@ -71,7 +61,8 @@ export default function DasboardEntries() {
     dataFetchedRef.current = true;
     fetchArticles();
     // console.log([...ArticleService.articleList]);
-  },[])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[articles])
 
   return (
     <>
@@ -85,6 +76,7 @@ export default function DasboardEntries() {
                   title: "",
                   description: "",
                   createdAt: "",
+                  isDeleted: false,
                 }
           }
           setNewArticle={ editArticleModal
@@ -97,7 +89,7 @@ export default function DasboardEntries() {
                   );
                 }
               : (article) => {
-                  ArticleService.postArticle(article);
+                  ArticleService.postArticle(article, user!.id);
                   setArticles([...articles, article]);
                 }
           }
@@ -118,6 +110,7 @@ export default function DasboardEntries() {
                   title: "",
                   description: "",
                   createdAt: "",
+                  isDeleted: false,
                 });
                 setEditArticleModal(false);
                 setShowArticleModal(true);

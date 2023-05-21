@@ -16,6 +16,7 @@ export default function ArticleModal(props: articleModalProps){
     title: props.article?.title || "",
     description: props.article?.description || "",
     createdAt: props.article?.createdAt || "",
+    isDeleted: props.article?.isDeleted || false,
   });
 
   const onCloseModal = (e : React.FormEvent<HTMLFormElement>) => {

@@ -1,5 +1,5 @@
 export interface User {
-    id?: string,
+    id: string,
     isLoggedIn: boolean
     avatarUrl?: string 
     name: string

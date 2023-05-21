@@ -13,6 +13,7 @@ async function userRoute(req: NextApiRequest, res: NextApiResponse<User>) {
     })
   } else {
     res.json({
+      id: '',
       isLoggedIn: false,
       name: '',
       avatarUrl: '',

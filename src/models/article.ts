@@ -1,15 +1,17 @@
-import UserCredentials from "./user";
+import {User} from "./user";
 
 export default interface IArticle{
     id:number,
     title:string,
     description:string,
-    createdBy: string,
-    image: string,
+    createdAt: string,
+    image?: string,
+    isDeleted: boolean,
+    createdBy?: string
 }
 
-export interface ISignedArticle extends IArticle{
-    createdByUser : UserCredentials
+export interface SignedArticle extends IArticle{
+    user : User
 }
 // type article = {
 //     id: number;
