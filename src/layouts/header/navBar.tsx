@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 
 const NavBar = () => {
   const [isOpenMobileMenu, setMobileMenu] = useState<boolean>(false);
-  const {user, mutateUser} = useUser({redirectTo: '/landingPage', redirectIfFound: false})
+  const {user, mutateUser} = useUser({redirectTo: '', redirectIfFound: false})
 
   useEffect(() => {
     return (window.onscroll = function () {
