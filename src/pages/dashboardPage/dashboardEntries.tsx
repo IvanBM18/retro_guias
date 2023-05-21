@@ -73,7 +73,7 @@ export default function DasboardEntries() {
           article={ editArticleModal
               ? article
               : {
-                  id: randomInt(10000),
+                  id: Math.floor(Math.random()*1000),
                   title: "",
                   description: "",
                   createdAt: new Date().toLocaleDateString(),

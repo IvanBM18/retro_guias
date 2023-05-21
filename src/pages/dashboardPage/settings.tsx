@@ -54,31 +54,32 @@ const SettingsPage : NextPageWithLayout = () => {
               id="name"  
               type="text" 
               placeholder={user.name ?? "Nombre"} />
-            <label htmlFor="email" className='text-white text-xl'>Correo</label>
+            {/* <label htmlFor="email" className='text-white text-xl'>Correo</label>
             <input className='appearance-none relative block w-full px-3 py-2 text-gray-900 rounded-b-md sm:text-sm md:text-xl h-10 ' 
               id="email"
               type="email" 
               name='email'
               placeholder={user.email ?? "Correo"} 
-              />
-              <label htmlFor="password" className='mb-2 text-white text-xl'>Contraseña</label>
+              /> */}
+              {/* <label htmlFor="password" className='mb-2 text-white text-xl'>Contraseña</label>
               <input className="appearance-none relative block w-full px-3 py-2 text-gray-900 rounded-b-md sm:text-sm md:text-xl h-10 "
                 id="password"
                 type="password" 
                 name='password'
-                placeholder="********" />
+                placeholder="********" /> */}
               {/* Submit Button */}
                 <button
                   type="submit"
+                  disabled={isVerified}
                   className="mt-8 h px-4 py-3 rounded-md bg-blue-800 hover:bg-sky-600 text-sky-100 text-2xl"
                 >
                   Guardar Cambios
                 </button>
           </form>
         </section>
-        {
+        {!isVerified &&
           <div className='text-red-900 text-center'>
-            Verifique su correo electronico para poder cambiar su contraseña
+            Verifique su correo electronico para poder cambiar las opciones de usuario
           </div>}
       </main>
     </>

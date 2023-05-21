@@ -124,9 +124,14 @@ interface props{
   articles:IArticle[],
 }
 
-export default function LandingPage({articles} : props) {
+export default function LandingPage() {
+  const [articles, setArticles] = useState<IArticle[]>([]);
   
-
+  useEffect(() => {
+    ArticleService.fetchAll().then((res) => {
+      setArticles(res);
+    });
+  });
   return (
     <>
       <div className="bg-gray-900 ">
@@ -153,12 +158,12 @@ export default function LandingPage({articles} : props) {
   );
 }
 
-//Staticaly generates the page with the articles created during testing, this will be generate new data every 60 seconds
-export const getStaticProps : GetStaticProps = async () => {
-  const articles = await ArticleService.fetchAll();
+// //Staticaly generates the page with the articles created during testing, this will be generate new data every 60 seconds
+// export const getStaticProps : GetStaticProps = async () => {
+//   const articles = await ArticleService.fetchAll();
 
-  return{
-    props: { articles },
-    revalidate: 60  // 24 hours
-  }
-};
+//   return{
+//     props: { articles },
+//     revalidate: 60  // 24 hours
+//   }
+// };
