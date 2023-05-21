@@ -7,6 +7,7 @@ import SeeRowButton from "./component/seeRowButton";
 import ArticleService from "@/services/database/articleService";
 import IArticle from "../../models/article";
 import useUser from "@/lib/useUser";
+import { randomInt } from "crypto";
 
 const dummyData : IArticle[] = [
   {
@@ -72,10 +73,10 @@ export default function DasboardEntries() {
           article={ editArticleModal
               ? article
               : {
-                  id: articles.length+1,
+                  id: randomInt(10000),
                   title: "",
                   description: "",
-                  createdAt: "",
+                  createdAt: new Date().toLocaleDateString(),
                   isDeleted: false,
                 }
           }
@@ -89,7 +90,7 @@ export default function DasboardEntries() {
                   );
                 }
               : (article) => {
-                  ArticleService.postArticle(article, user!.id);
+                  ArticleService.postArticle({...article,userid:user!.id,createdBy:user!.name});
                   setArticles([...articles, article]);
                 }
           }

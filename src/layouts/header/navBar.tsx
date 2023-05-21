@@ -27,7 +27,6 @@ const NavBar = () => {
 
   const showMobileMenu = () => {
     const menu: HTMLElement | null = document.querySelector("#mobileMenu");
-    console.log(menu);
     if (!menu) return;
     if (!isOpenMobileMenu) {
       menu?.classList.add("block");
@@ -88,7 +87,7 @@ const NavBar = () => {
                 </h2>
               </div>
               {/* <!-- Mobile menu button --> */}
-              <div className="flex lg:hidden">
+              <div className="flex md:hidden">
                 <button
                   onClick={showMobileMenu}
                   className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"

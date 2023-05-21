@@ -8,6 +8,7 @@ export default interface IArticle{
     image?: string,
     isDeleted: boolean,
     createdBy?: string
+    userid?: string
 }
 
 export interface SignedArticle extends IArticle{

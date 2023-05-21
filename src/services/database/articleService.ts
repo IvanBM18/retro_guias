@@ -5,24 +5,26 @@ import { collection, addDoc, FirestoreError, getDocs, doc, setDoc, updateDoc, de
 
 class ArticleService{
     static articleList: IArticle[] = [];
-    static async fetchAll() {
+
+    static async fetchAll() : Promise<IArticle[]> {
         try{
             this.articleList = []
             // console.log('Fetching for articles . . .')
             const query = await getDocs(collection(db,'articles'));
-            query.forEach((article) => {
-                if(!this.articleList.includes(article.data() as IArticle))
-                    this.articleList.push(article.data() as IArticle)
+            query.forEach((doc) => {
+                if(!this.articleList.includes(doc.data() as IArticle) && !doc.data().isDeleted)
+                    this.articleList.push(doc.data() as IArticle)
             })
+            
         }catch(error){
             console.error(`[ERROR] ${error}`)
         }
-        
+            return this.articleList;
     }
 
     static async fectchByUser(userId : string){
         try{
-            const q = query(collection(db,'articles'),where('createdBy','==',userId))
+            const q = query(collection(db,'articles'),where('userid','==',userId))
             const querySnapshot = await getDocs(q);
             const articles : IArticle[] = querySnapshot.docs.map((doc) => {
                 return doc.data() as IArticle;
@@ -34,10 +36,10 @@ class ArticleService{
         }
     }
 
-    static async postArticle(article : IArticle, userId : string){
-        let newArticle = {...article,createdBy:userId}
+    static async postArticle(article : IArticle){
+        let newArticle = {...article}
         console.log('Posting Article ...')
-        await setDoc(doc(db,'articles',newArticle.toString()),article)
+        await setDoc(doc(db,'articles',newArticle.id.toString()),article)
     }
 
     static async updateArticle(article : IArticle){

@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import IArticle from "../models/article";
+import useUser from "@/lib/useUser";
 
 interface articleModalProps {
   onClose(): void;
@@ -9,6 +10,7 @@ interface articleModalProps {
 }
 
 export default function ArticleModal(props: articleModalProps){
+  const {user} = useUser({redirectTo: '', redirectIfFound: false})
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const [article, setArticle] = useState<IArticle>({
@@ -23,11 +25,11 @@ export default function ArticleModal(props: articleModalProps){
     e.preventDefault();
     setLoading(false);
     const currDate = new Date().toLocaleDateString();
-    setArticle({ ...article, createdAt: currDate });
+    setArticle({ ...article, createdAt: currDate, isDeleted: false, userid: user!.id, createdBy: user!.name });
     //props.setNewArticle && props.setNewArticle(article);
     // console.log(article,props.setNewArticle);
     if (article?.title !== "" && props.setNewArticle){
-      props.setNewArticle({...article, createdAt:currDate });
+      props.setNewArticle({...article});
     }
     props.onClose();
   };
