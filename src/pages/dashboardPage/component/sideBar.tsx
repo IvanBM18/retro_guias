@@ -7,11 +7,12 @@ import Router from 'next/router'
 const SideBar = () => {
   const {mutateUser} = useUser({redirectTo: '/landingPage', redirectIfFound: false})
   const handleLogout =  async () => {
+    // Router.push('/landingPage')
     try{
       mutateUser(
         await fetchJson('/api/logout') 
       )
-      Router.push('/landingPage')
+      
     }catch (error : any) {
         console.error('[ERROR]: An unexpected error happened in logout: ', error.data.message)
       
@@ -100,7 +101,8 @@ const SideBar = () => {
                   </Link>
                 </li>
                 <li className="cursor-pointer rounded-sm">
-                    <span
+                    <Link
+                      href="/landingPage"
                       onClick={handleLogout}
                       className="flex items-center p-2 space-x-3 rounded-md"
                     >
@@ -119,7 +121,7 @@ const SideBar = () => {
                         />
                       </svg>
                       <span>Cerrar Sesión</span>
-                    </span>
+                    </Link>
                 </li>
               </ul>
             </div>
