@@ -9,7 +9,7 @@ const Dashboard : NextPageWithLayout= () => {
 
   if(!user || user.isLoggedIn === false){
     return (
-    <h1 className="text-center">Incia sesion para ver esta pagina</h1>
+    <h1 className="text-center text-white">Incia sesion para ver esta pagina</h1>
     )
   }
   return (

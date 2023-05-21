@@ -1,24 +1,35 @@
-import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import UserCredentials from "../../models/user";
 import fireBaseApp from "../firebase/firebaseApp";
+import { send } from "process";
 
 class AuthService{
   static user : User;
   static auth = getAuth(fireBaseApp);
 
   static async signup(newUser : UserCredentials, name : string): Promise<User>{
-    // console.log(newUser);
-    await createUserWithEmailAndPassword(this.auth,newUser.email,newUser.password)
-      .then((userCredentials : UserCredential) =>{
-        updateProfile(this.auth.currentUser!, {displayName:name})
-        this.user = userCredentials.user;
-        return this.user;
-        // UserService.registerUserName({id: this.user.uid, name:name,...newUser})
-      })
-      .catch((error : AuthError) => {
-        console.error(`[ERROR CODE ${error.code}] : ${error.message}`);
-      })
-      return this.user;
+    try {
+      const newUserCredentials : UserCredential = await createUserWithEmailAndPassword(this.auth,newUser.email,newUser.password);
+      
+      await updateProfile(newUserCredentials.user, {displayName:name})
+
+      await sendEmailVerification(newUserCredentials.user);
+      
+      return newUserCredentials.user;
+    }catch (error : any){
+      console.log(`[ERROR] while trying to create a new user: ${error.message}`)
+      throw error;
+    }
+    // await createUserWithEmailAndPassword(this.auth,newUser.email,newUser.password)
+    //   .then((userCredentials : UserCredential) =>{
+    //     updateProfile(this.auth.currentUser!, {displayName:name})
+    //     this.user = userCredentials.user;
+    //     return this.user;
+    //   })
+    //   .catch((error : AuthError) => {
+    //     console.error(`[ERROR CODE ${error.code}] : ${error.message}`);
+    //   })
+    //   return this.user;
       
   }
 

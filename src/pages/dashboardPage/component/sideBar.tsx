@@ -1,7 +1,23 @@
 import React from 'react'
 import Link from "next/link";
+import useUser from '@/lib/useUser';
+import fetchJson from '@/lib/fetchJson';
+import Router from 'next/router'
 
 const SideBar = () => {
+  const {mutateUser} = useUser({redirectTo: '/landingPage', redirectIfFound: false})
+  const handleLogout =  async () => {
+    try{
+      mutateUser(
+        await fetchJson('/api/logout') 
+      )
+      Router.push('/landingPage')
+    }catch (error : any) {
+        console.error('[ERROR]: An unexpected error happened in logout: ', error.data.message)
+      
+    }
+  }
+
   return (
     <>
       <div className=''>
@@ -35,8 +51,8 @@ const SideBar = () => {
                   </Link>
                 </li>
                 <li className="rounded-sm">
-                  <a
-                    href="#"
+                  <Link
+                    href="/dashboardPage"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
@@ -54,33 +70,11 @@ const SideBar = () => {
                       />
                     </svg>
                     <span>Entradas</span>
-                  </a>
-                </li>
-                <li className="rounded-sm">
-                  <Link
-                    href="/dashboardPage"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                      />
-                    </svg>
-                    <span>Videojuegos</span>
                   </Link>
                 </li>
                 <li className="rounded-sm">
                   <Link
-                    href="/dashboardPage"
+                    href="/dashboardPage/settings"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
@@ -105,9 +99,9 @@ const SideBar = () => {
                     <span>Ajustes</span>
                   </Link>
                 </li>
-                <li className="rounded-sm">
-                    <Link
-                    href='/landingPage'
+                <li className="cursor-pointer rounded-sm">
+                    <span
+                      onClick={handleLogout}
                       className="flex items-center p-2 space-x-3 rounded-md"
                     >
                       <svg
@@ -125,7 +119,7 @@ const SideBar = () => {
                         />
                       </svg>
                       <span>Cerrar Sesión</span>
-                    </Link>
+                    </span>
                 </li>
               </ul>
             </div>

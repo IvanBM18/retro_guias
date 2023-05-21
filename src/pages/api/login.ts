@@ -10,7 +10,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const fbUser = await AuthService.login({email, password} as UserCredentials)
-    const user = { isLoggedIn: true, name: fbUser.displayName, avatarUrl:fbUser.photoURL } as User
+    const user = { isLoggedIn: true, name: fbUser.displayName, avatarUrl:fbUser.photoURL , email} as User
     req.session.user = user
     await req.session.save()
     res.json(user)

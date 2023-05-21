@@ -3,11 +3,7 @@ export class FetchError extends Error {
     data: {
       message: string
     }
-    constructor({
-      message,
-      response,
-      data,
-    }: {
+    constructor({ message, response, data,}: {
       message: string
       response: Response
       data: {

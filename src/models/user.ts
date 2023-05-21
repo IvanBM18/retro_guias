@@ -3,6 +3,7 @@ export interface User {
     isLoggedIn: boolean
     avatarUrl?: string 
     name: string
+    email: string
 }
 export default interface UserCredentials{
     email:string,

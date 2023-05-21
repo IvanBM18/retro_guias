@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 
 const NavBar = () => {
   const [isOpenMobileMenu, setMobileMenu] = useState<boolean>(false);
-  const {user} = useUser({redirectTo: '/landingPage', redirectIfFound: false})
+  const {user, mutateUser} = useUser({redirectTo: '/landingPage', redirectIfFound: false})
 
   useEffect(() => {
     return (window.onscroll = function () {
@@ -83,7 +83,9 @@ const NavBar = () => {
                     alt="Logo Retro Wiki"
                   />
                 </Link>
-
+                <h2 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text  font-extrabold text-transparent text-3xl  ">
+                  Retro Wiki  
+                </h2>
               </div>
               {/* <!-- Mobile menu button --> */}
               <div className="flex lg:hidden">
@@ -151,18 +153,12 @@ const NavBar = () => {
                 >
                   Contacto
                 </Link>
-                <button
-                onClick={() =>{
-                  if(!user || !user.isLoggedIn) return;
-                  fetch('/api/logout')
-                }}>
                   <Link
-                    href="/loginPage"
+                    href={user && user.name ? "/dashboardPage/settings" : "/loginPage"}
                     className="my-2 transition-colors duration-300 transform  hover:text-emerald-400 dark:hover:text-sky-500 md:mx-4 md:my-0 cursor-pointer"
                   >
                     {(user && user.isLoggedIn) ? user.name : 'Iniciar sesión'}
                   </Link>
-                </button>
                 
                 
                 <Link

@@ -9,7 +9,7 @@ async function signupRoute(req: NextApiRequest, res: NextApiResponse){
   const { email, password, name } = await req.body
   try{
     const fbUser = await AuthService.signup({email, password} as UserCredentials,name)
-    const user = { isLoggedIn: true, name: name,  avatarUrl:fbUser.photoURL } as User
+    const user = { isLoggedIn: true, name, email, avatarUrl:fbUser.photoURL } as User
     req.session.user = user
     await req.session.save()
     res.json(user)

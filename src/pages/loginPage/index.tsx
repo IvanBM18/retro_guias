@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import NewUserModal from "./components/newUserModal";
 import fetchJson , {FetchError} from "../../lib/fetchJson";
 import useUser from "../../lib/useUser";
+import Image from "next/image";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -36,6 +37,8 @@ function LoginPage() {
     }catch (error) {
       if (error instanceof FetchError) {
         setErrorMsg(error.data.message)
+        alert("Credenciales Invalidas, intente de nuevo")
+        console.log("[ERROR]: An unexpected fetch error happened in login: ", error.data.message)
       } else {
         console.error('[ERROR]: An unexpected error happened in login: ', errorMsg)
       }
@@ -49,7 +52,9 @@ function LoginPage() {
         <div className="flex items-center justify-center h-screen bg-gray-900">
           <div>
             <section>
-              <img
+              <Image
+                height={40}
+                width={500}
                 className="mx-auto h-40 w-auto"
                 src="https://cdn-icons-png.flaticon.com/512/2296/2296559.png"
                 alt="Logo"
@@ -63,9 +68,9 @@ function LoginPage() {
             onSubmit={handleLogin}>
               {/* Email Textbox */}
               <div className="rounded-md shadow-sm -space-y-px">
-                <label htmlFor="email_adress" className="text-white mb-2">
+                <label htmlFor="email_adress" className="text-white text-xl mb-2">
                   {" "}
-                  Correo:{" "}
+                  Correo{" "}
                 </label>
                 <input
                   type="email"
@@ -74,13 +79,13 @@ function LoginPage() {
                   autoComplete="email"
                   required
                   placeholder="Ejemplo@correo.com"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm md:text-lg"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               {/* Password Textbox */}
               <div>
-                <label htmlFor="password" className="text-white mb-2">
+                <label htmlFor="password" className="text-white text-xl mb-2">
                   Contraseña
                 </label>
                 <input
@@ -89,7 +94,7 @@ function LoginPage() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm md:text-lg"
                   placeholder="Contraseña"
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -105,7 +110,7 @@ function LoginPage() {
               <div className="flex justify-center pt-8">
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white "
+                  className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 sm:text-sm md:text-xl font-medium text-white "
                 >
                   Inicia Sesion
                 </button>

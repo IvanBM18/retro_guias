@@ -18,9 +18,12 @@ const DashboardLayout  = ({children} : Props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/retrowiki.ico" />
       </Head>
-      <main className='flex'>
+      <main className='flex '>
         <SideBar/>
-        {children}
+        <div className='bg-gray-800 h-screen w-screen'>
+          {children}
+        </div>
+        
       </main>
     </>
   )

@@ -7,7 +7,7 @@ import AuthService from '@/services/authentication/authService'
 function logoutRoute(req: NextApiRequest, res: NextApiResponse<User>) {
   AuthService.logout()
   req.session.destroy()
-  res.json({ isLoggedIn: false, name: '', avatarUrl: '' })
+  res.json({ isLoggedIn: false, name: '', avatarUrl: '', email: '' })
 }
 
 export default withIronSessionApiRoute(logoutRoute, sessionOptions)
