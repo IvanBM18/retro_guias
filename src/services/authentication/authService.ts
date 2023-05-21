@@ -54,6 +54,11 @@ class AuthService{
     })
   }
 
+  static async isVerified(){
+    console.log(this.auth.currentUser?.emailVerified);
+    return this.auth.currentUser?.emailVerified;
+  }
+
   static async getCurrentUser(){
     if(this.auth.currentUser){
       return this.auth.currentUser;

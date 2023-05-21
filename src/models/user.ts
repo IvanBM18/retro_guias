@@ -4,6 +4,7 @@ export interface User {
     avatarUrl?: string 
     name: string
     email: string
+    isVerified?: boolean
 }
 export default interface UserCredentials{
     email:string,

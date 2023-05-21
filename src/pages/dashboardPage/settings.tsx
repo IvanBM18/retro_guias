@@ -1,12 +1,27 @@
 import DashboardLayout from '@/layouts/dashboard'
-import React, { ReactElement, ReactNode } from 'react'
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import { NextPageWithLayout } from '../_app'
 import useUser from '@/lib/useUser'
 import Image from 'next/image'
+import fetchJson from '@/lib/fetchJson'
+import { User } from '@/models/user'
 
 const SettingsPage : NextPageWithLayout = () => {
 
   const {user, mutateUser} = useUser({redirectTo: '/loginPage', redirectIfFound: false})
+  const [isVerified, setIsVerified] = useState<boolean>(false)
+  
+  useEffect(() => {
+    let userData;
+    fetchJson('/api/verifyUser').then((res : any) => {
+      console.log(`Response from verify ${res}`)
+      userData = res as User
+      if(userData.isVerified === true){
+        setIsVerified(true)
+      }
+    })
+    
+  }, [isVerified,user])
 
   if(!user || user.isLoggedIn === false){
     return (
@@ -61,6 +76,10 @@ const SettingsPage : NextPageWithLayout = () => {
                 </button>
           </form>
         </section>
+        {
+          <div className='text-red-900 text-center'>
+            Verifique su correo electronico para poder cambiar su contraseña
+          </div>}
       </main>
     </>
   )
