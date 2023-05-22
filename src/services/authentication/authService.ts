@@ -1,8 +1,8 @@
-import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import {  AuthError, User, UserCredential, createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut, updateProfile } from "firebase/auth";
 import UserCredentials from "../../models/user";
 import fireBaseApp from "../firebase/firebaseApp";
-import { send } from "process";
-
+import firebase from 'firebase/app';
+import { GoogleAuthProvider } from "firebase/auth";
 class AuthService{
   static user : User;
   static auth = getAuth(fireBaseApp);
@@ -43,6 +43,17 @@ class AuthService{
         console.error(`[ERROR CODE ${error.code}] : ${error.message}`);
       })
       return this.user;
+  }
+
+  static async googleSignUp(){
+    try{
+      const provider = new GoogleAuthProvider();
+      const credentials :UserCredential = await signInWithRedirect(this.auth,provider)
+      return credentials.user;
+    } catch (error : any){
+      console.log(`[ERROR] while trying to create a new user: ${error.message}`)
+      throw error;
+    }
   }
 
   static async logout(){

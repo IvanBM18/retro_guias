@@ -2,6 +2,7 @@ import React, { Fragment, ReactElement, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import useUser from '../../../lib/useUser'
 import fetchJson from '../../../lib/fetchJson'
+import Image from 'next/image'
 interface newUserProps {
   onClose: () => void
 }
@@ -19,10 +20,28 @@ const NewUserModal = (props: newUserProps) => {
   //   return false;
   // }
 
+  const handleGoogleSignUp = async () => {
+    
+    setLoading(true);
+    try{
+      mutateUser(
+        await fetchJson("/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({type: 'google'}),
+        })
+      )
+    }catch(error){
+      console.error('[ERROR]: An unexpected error happened in google signup:', error)
+    }
+
+    onClose();
+  }
+
   const handleSignup = async (e : React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
     setLoading(true);
-    const body= {name,email,password};
+    const body= {name,email,password,type: 'local'};
     try{
       mutateUser(
         await fetchJson("/api/signup", {
@@ -82,7 +101,6 @@ const NewUserModal = (props: newUserProps) => {
                 <Dialog.Title as="h3" className="text-xl font-bold leading-6 text-white">
                   Registrate
                 </Dialog.Title>
-
                 <form className="w-full max-w-lg" onSubmit={handleSignup} >
                   {/* Name TextBox */}
                   <div className="w-full px-3 mb-3">
@@ -140,11 +158,24 @@ const NewUserModal = (props: newUserProps) => {
                   <div className="flex justify-center pt-8">
                     <button 
                       type="submit"
-                      className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-sm font-medium text-white ">
+                      className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 rounded-md px-4 py-3 text-md font-medium text-white ">
                       Crear cuenta
                     </button>
                   </div>
                 </form>
+                <button
+                  className='flex flex-row mt-4 w-full justify-center bg-white rounded-md py-3 px-4'
+                  onClick={handleGoogleSignUp}
+                  >
+                  <p className="text-md font-medium">Registrate con Google</p>
+                  <Image 
+                  width={24}
+                  height={24}
+                  src="https://w7.pngwing.com/pngs/249/19/png-transparent-google-logo-g-suite-google-guava-google-plus-company-text-logo.png" 
+                  alt="Google Logo" 
+                  className="w-6 h-6 ml-2" 
+                  />
+                </button>
               </div>
             </Transition.Child>
           </div>
