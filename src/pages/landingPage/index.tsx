@@ -1,6 +1,6 @@
 //TODO: Fix image layout on mobile
 //TODO: Create an article card component
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import IArticle from "../../models/article";
 import ArticleCarrousel from "@/components/articleCarrousel";
@@ -126,12 +126,23 @@ interface props{
 
 export default function LandingPage() {
   const [articles, setArticles] = useState<IArticle[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const dataFetchedRef = useRef(false);
   
-  useEffect(() => {
+  const fetchArticles = () =>{
     ArticleService.fetchAll().then((res) => {
       setArticles(res);
-    });
-  });
+    }).catch(error => {console.error(`[ERROR] in dashboard fetching: ${error}`)});
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    if (dataFetchedRef.current) return;
+    setIsLoading(true);
+    dataFetchedRef.current = true;
+    fetchArticles();
+    
+  },[articles]);
   return (
     <>
       <div className="bg-gray-900 ">
@@ -150,6 +161,11 @@ export default function LandingPage() {
             <h1 className="pb-8 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
               Conoce nuestras ultimas noticias
             </h1>
+            {isLoading &&
+              <p className="flex justify-center items-center text-center text-xl">
+                Cargando articulos...
+              </p>
+            }
             <ArticleCarrousel data={articles ?? dummyData} />
           </div>
         </div>
