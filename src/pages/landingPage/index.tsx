@@ -142,7 +142,7 @@ export default function LandingPage() {
     dataFetchedRef.current = true;
     fetchArticles();
     
-  },[articles]);
+  },[]);
   return (
     <>
       <div className="bg-gray-900 ">

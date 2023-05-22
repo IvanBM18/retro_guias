@@ -63,7 +63,7 @@ export default function DasboardEntries() {
     fetchArticles();
     // console.log([...ArticleService.articleList]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[articles])
+  },[])
 
   return (
     <>
