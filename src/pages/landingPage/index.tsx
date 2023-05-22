@@ -162,7 +162,7 @@ export default function LandingPage() {
               Conoce nuestras ultimas noticias
             </h1>
             {isLoading &&
-              <p className="flex justify-center items-center text-center text-xl">
+              <p className="flex justify-center items-center text-center text-xl text-white">
                 Cargando articulos...
               </p>
             }

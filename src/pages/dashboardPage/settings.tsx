@@ -14,7 +14,7 @@ const SettingsPage : NextPageWithLayout = () => {
   useEffect(() => {
     let userData;
     fetchJson('/api/verifyUser').then((res : any) => {
-      console.log(`Response from verify ${res}`)
+      // console.log(`Response from verify ${res}`)
       userData = res as User
       if(userData.isVerified === true){
         setIsVerified(true)
