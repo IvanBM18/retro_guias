@@ -154,6 +154,10 @@ export default function LandingPage() {
             <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed text-white">
               Retro Wiki es una enciclopedia virtual que contiene información sobre videojuegos retro, consolas, accesorios y mucho más. 
             </p>
+            <p className="text-red-600 tect-center">
+              [AVISO] debido a fallas en el servidor de retro wiki en firebase, no es posible crear, leer o editar articulos durante el 22/05/2021.<br/>
+              Disculpe las molestias.
+            </p>
           </div>
         </div>
         <div className="mx-auto max-w-screen px-4 py-24 lg:flex lg:h-screen lg:items-center">
